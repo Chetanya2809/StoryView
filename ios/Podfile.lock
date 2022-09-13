@@ -75,6 +75,9 @@ PODS:
   - glog (0.3.5)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
+  - PromisesObjC (2.1.1)
+  - PromisesSwift (2.1.1):
+    - PromisesObjC (= 2.1.1)
   - RCT-Folly (2021.06.28.00-v2):
     - boost
     - DoubleConversion
@@ -284,10 +287,11 @@ PODS:
   - React-jsinspector (0.69.5)
   - React-logger (0.69.5):
     - glog
-  - react-native-video (5.2.0):
+  - react-native-video (6.0.0-alpha.1):
     - React-Core
-    - react-native-video/Video (= 5.2.0)
-  - react-native-video/Video (5.2.0):
+    - react-native-video/Video (= 6.0.0-alpha.1)
+  - react-native-video/Video (6.0.0-alpha.1):
+    - PromisesSwift
     - React-Core
   - React-perflogger (0.69.5)
   - React-RCTActionSheet (0.69.5):
@@ -355,8 +359,6 @@ PODS:
     - React-jsi (= 0.69.5)
     - React-logger (= 0.69.5)
     - React-perflogger (= 0.69.5)
-  - RNVectorIcons (9.2.0):
-    - React-Core
   - SocketRocket (0.6.0)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -419,7 +421,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -437,6 +438,8 @@ SPEC REPOS:
     - fmt
     - libevent
     - OpenSSL-Universal
+    - PromisesObjC
+    - PromisesSwift
     - SocketRocket
     - YogaKit
 
@@ -505,8 +508,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/runtimeexecutor"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  RNVectorIcons:
-    :path: "../node_modules/react-native-vector-icons"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -529,6 +530,8 @@ SPEC CHECKSUMS:
   glog: 3d02b25ca00c2d456734d0bcff864cbc62f6ae1a
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
+  PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
+  PromisesSwift: 99fddfe4a0ec88a56486644c0da106694c92a604
   RCT-Folly: b9d9fe1fc70114b751c076104e52f3b1b5e5a95a
   RCTRequired: 85c60c4bde8241278be2c93420de4c65475a2151
   RCTTypeSafety: 15990f289215eb0fc65c5eb6e2610faeeda8d5e1
@@ -543,7 +546,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: e42f0b46de293a026c2fb20e524d4fe09f81f575
   React-jsinspector: e385fb7a1440ae3f3b2cd1a139ca5aadaab43c10
   React-logger: 15c734997c06fe9c9b88e528fb7757601e7a56df
-  react-native-video: a4c2635d0802f983594b7057e1bce8f442f0ad28
+  react-native-video: bb6f12a7198db53b261fefb5d609dc77417acc8b
   React-perflogger: 367418425c5e4a9f0f80385ee1eaacd2a7348f8e
   React-RCTActionSheet: e4885e7136f98ded1137cd3daccc05eaed97d5a6
   React-RCTAnimation: 7c5a74f301c9b763343ba98a3dd776ed2676993f
@@ -556,7 +559,6 @@ SPEC CHECKSUMS:
   React-RCTVibration: 42b34fde72e42446d9b08d2b9a3ddc2fa9ac6189
   React-runtimeexecutor: c778439c3c430a5719d027d3c67423b390a221fe
   ReactCommon: ab1003b81be740fecd82509c370a45b1a7dda0c1
-  RNVectorIcons: fcc2f6cb32f5735b586e66d14103a74ce6ad61f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   Yoga: c2b1f2494060865ac1f27e49639e72371b1205fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
