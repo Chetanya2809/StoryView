@@ -8,21 +8,21 @@ const StoryContent = props => {
   console.log('my PRops', props.story);
   return (
     <View style={{flex: 1}}>
-      {props.story.map(item => {
-        return (
-          <Video
-            source={{uri: props.story[0].url}}
-            resizeMode={'contain'}
-            repeat={true}
-            style={{
-              height: '100%',
-              width: height - 10,
-              margin: 4,
-              backgroundColor: 'red',
-            }}
-          />
-        );
-      })}
+      {/* {props.story.map(item => {
+        return ( */}
+      <Video
+        source={{uri: props.story[0].url}}
+        resizeMode={'contain'}
+        repeat={true}
+        style={{
+          height: '100%',
+          width: height - 10,
+          margin: 4,
+          backgroundColor: 'red',
+        }}
+      />
+      {/* );
+      })} */}
     </View>
     // <Image
     //     resizeMode="contain"
