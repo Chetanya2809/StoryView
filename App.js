@@ -1,5 +1,6 @@
 import React from 'react';
-import StoryContainer from './src/StoryContainer';
+import {StatusBar} from 'react-native';
+import StoryContainer from './src/storyView/StoryContainer';
 
 const App = () => {
   return <StoryContainer />;
