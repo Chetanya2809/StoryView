@@ -1,9 +1,9 @@
 import React from 'react';
-import ProgressBar from './src/storyView/progressBar/ProgressBar';
-import StoryContainer from './StoryContainer';
+import {StatusBar} from 'react-native';
+import StoryContainer from './src/storyView/StoryContainer';
 
 const App = () => {
-  return <ProgressBar />;
+  return <StoryContainer />;
 };
 
 export default App;
