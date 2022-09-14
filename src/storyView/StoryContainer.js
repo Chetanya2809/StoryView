@@ -1,21 +1,13 @@
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import StoryView from './StoryView';
-import ProgressBar from './progressBar/ProgressBar';
 
 const {height, width} = Dimensions.get('screen');
-const StoryContainer = () => {
+const StoryContainer = ({open, handleOpen}) => {
   return (
     <Modal
-      isVisible={true}
+      isVisible={open.open}
       coverScreen={true}
       style={{
         backgroundColor: 'black',
@@ -25,7 +17,7 @@ const StoryContainer = () => {
         // width: width,
       }}>
       {/* <ProgressBar /> */}
-      <StoryView />
+      <StoryView storyData={open.item} />
     </Modal>
   );
 };
