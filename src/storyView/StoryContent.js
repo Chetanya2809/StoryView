@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
@@ -12,29 +19,31 @@ const StoryContent = props => {
     setCurrentIndex(param);
   };
   return (
-    <View style={{flex: 1}}>
+    <TouchableOpacity style={{flex: 1}}>
       <ProgressBar
         stories={props.story}
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-      <Video
-        source={{uri: props.story[0].url}}
-        resizeMode={'contain'}
-        repeat={true}
-        style={{
-          height: '100%',
-          width: height ,
-          // margin: 4,
-          backgroundColor: 'black',
-        }}
-      />
-    </View>
-    // <Image
-    //     resizeMode="contain"
-    //     style={{height: '100%', width: '100%'}}
-    //     source={require('../assets/images/michael-dam-mEZ3PoFGs_k-unsplash.jpg')}
-    //   />
+      {props.story[currentIndex].type == 'video' ? (
+        <Video
+          source={{uri: props.story[currentIndex].url}}
+          resizeMode={'contain'}
+          // repeat={true}
+          style={{
+            height: '100%',
+            width: height,
+            backgroundColor: 'black',
+          }}
+        />
+      ) : (
+        <Image
+          resizeMode="contain"
+          style={{height: '100%', width: '100%'}}
+          source={{uri: props.story[currentIndex].url}}
+        />
+      )}
+    </TouchableOpacity>
   );
 };
 
