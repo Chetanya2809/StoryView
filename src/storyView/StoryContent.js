@@ -1,28 +1,34 @@
 import {StyleSheet, Text, View, Image, Dimensions} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import Video from 'react-native-video';
+import ProgressBar from './progressBar/ProgressBar';
 
 const height = Dimensions.get('window').width;
 console.log('hereee', height);
 const StoryContent = props => {
-  console.log('my PRops', props.story);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const _setCurrentIndex = param => {
+    setCurrentIndex(param);
+  };
   return (
     <View style={{flex: 1}}>
-      {/* {props.story.map(item => {
-        return ( */}
+      <ProgressBar
+        stories={props.story}
+        currentIndex={currentIndex}
+        setCurrentIndex={_setCurrentIndex}
+      />
       <Video
         source={{uri: props.story[0].url}}
         resizeMode={'contain'}
         repeat={true}
         style={{
           height: '100%',
-          width: height - 10,
-          margin: 4,
-          backgroundColor: 'red',
+          width: height ,
+          // margin: 4,
+          backgroundColor: 'black',
         }}
       />
-      {/* );
-      })} */}
     </View>
     // <Image
     //     resizeMode="contain"

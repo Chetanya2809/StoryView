@@ -9,6 +9,7 @@ import {
 import React from 'react';
 import Modal from 'react-native-modal';
 import StoryView from './StoryView';
+import ProgressBar from './progressBar/ProgressBar';
 
 const {height, width} = Dimensions.get('screen');
 const StoryContainer = () => {
@@ -23,6 +24,7 @@ const StoryContainer = () => {
         // height: height,
         // width: width,
       }}>
+      {/* <ProgressBar /> */}
       <StoryView />
     </Modal>
   );
