@@ -39,10 +39,10 @@ const ProgressBar = ({currentIndex, setCurrentIndex, stories}) => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
-      {stories.map((item,index) => {
+      {stories.map((item, index) => {
         return (
           <View
-          key={index}
+            key={index}
             style={[
               {width: width / data.length - 3},
               styles.fixedView,
