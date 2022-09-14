@@ -6,20 +6,18 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Colors from '../../utils/Colors';
-import vidArr from '../../utils/Constants';
 import React, {useEffect, useRef, useState} from 'react';
 
 const {height, width} = Dimensions.get('screen');
 
-const ProgressBar = () => {
-  const [data, setData] = useState(vidArr);
+const ProgressBar = ({currentIndex, setCurrentIndex, stories}) => {
+  const [data, setData] = useState(stories);
   const anim = useRef(new Animated.Value(0)).current;
-  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     Animated.timing(anim, {
       toValue: 1,
-      duration: vidArr[currentIndex].duration,
+      duration: stories[currentIndex].duration,
       useNativeDriver: false,
     }).start(({finished}) => {
       {
@@ -41,15 +39,16 @@ const ProgressBar = () => {
 
   return (
     <SafeAreaView style={styles.parentContainer}>
-      {data.map((item, index) => {
+      {stories.map((item,index) => {
         return (
           <View
+          key={index}
             style={[
-              {width: width / data.length - 2},
+              {width: width / data.length - 3},
               styles.fixedView,
               {
                 backgroundColor:
-                  index < currentIndex ? Colors.white : Colors.warmGrey,
+                  index < currentIndex ? Colors.red : Colors.warmGrey,
               },
             ]}>
             {index === currentIndex ? (
@@ -80,9 +79,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
   },
   progressView: {
-    height: 4,
+    height: 5,
     borderRadius: 30,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.red,
   },
   fixedView: {
     borderWidth: 0.3,
