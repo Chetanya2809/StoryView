@@ -5,7 +5,7 @@ import vidArr from '../utils/Constansts';
 import StoryContent from './StoryContent';
 
 const {height, width} = Dimensions.get('screen');
-const StoryView = () => {
+const StoryView = ({storyData}) => {
   const [data, setData] = useState(vidArr);
   console.log('datata', data);
 
@@ -19,13 +19,14 @@ const StoryView = () => {
   };
 
   return (
-    <FlatList
-      data={data}
-      renderItem={_onRender}
-      horizontal
-      pagingEnabled={true}
-      keyExtractor={_keyExtractor}
-    />
+    <StoryContent story={storyData.stories} />
+    // <FlatList
+    //   data={data}
+    //   renderItem={_onRender}
+    //   horizontal
+    //   pagingEnabled={true}
+    //   keyExtractor={_keyExtractor}
+    // />
   );
 };
 
