@@ -1,8 +1,9 @@
 import React from 'react';
-import StoryContainer from './src/StoryContainer';
+import ProgressBar from './src/storyView/progressBar/ProgressBar';
+import StoryContainer from './StoryContainer';
 
 const App = () => {
-  return <StoryContainer />;
+  return <ProgressBar />;
 };
 
 export default App;
