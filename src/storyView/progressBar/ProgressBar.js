@@ -6,36 +6,63 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Colors from '../../utils/Colors';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useImperativeHandle, useRef, useState} from 'react';
 
 const {height, width} = Dimensions.get('screen');
+var anim = new Animated.Value(0);
 
-const ProgressBar = ({currentIndex, setCurrentIndex, stories}) => {
-  const [data, setData] = useState(stories);
-  const anim = useRef(new Animated.Value(0)).current;
+const ProgressBar = (
+  {
+    currentIndex,
+    setCurrentIndex,
+    stories,
+    isPause,
+    currentAnim,
+    getAnimatedValue,
+  },
+  ref,
+) => {
+  useEffect(() => {
+    console.log('ispaused', isPause);
+    if (isPause) {
+      anim.stopAnimation();
+    } else animationFunction(currentAnim);
+  }, [isPause]);
 
   useEffect(() => {
+    anim.setValue(0);
+    animationFunction();
+  }, [currentIndex]);
+
+  useEffect(() => {
+    anim.addListener(({value}) => getAnimatedValue(value));
+  }, []);
+
+  const animationFunction = (currentAnim = 0) => {
+    anim.setValue(currentAnim);
     Animated.timing(anim, {
       toValue: 1,
-      duration: stories[currentIndex].duration,
+      duration:
+        stories[currentIndex].duration -
+        stories[currentIndex].duration * currentAnim,
       useNativeDriver: false,
     }).start(({finished}) => {
       {
-        currentIndex < data.length - 1
+        currentIndex < stories.length - 1
           ? finished
             ? setCurrentIndex(currentIndex + 1)
             : null
           : null;
       }
       {
-        currentIndex < data.length - 1
+        currentIndex < stories.length - 1
           ? finished
             ? anim.setValue(0)
             : null
           : null;
       }
     });
-  }, [currentIndex]);
+  };
 
   return (
     <SafeAreaView style={styles.parentContainer}>
@@ -44,7 +71,7 @@ const ProgressBar = ({currentIndex, setCurrentIndex, stories}) => {
           <View
             key={index}
             style={[
-              {width: width / data.length - 3},
+              {width: width / stories.length - 3},
               styles.fixedView,
               {
                 backgroundColor:
@@ -58,7 +85,7 @@ const ProgressBar = ({currentIndex, setCurrentIndex, stories}) => {
                   {
                     width: anim.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [0, width / data.length - data.length],
+                      outputRange: [0, width / stories.length - stories.length],
                     }),
                   },
                 ]}
