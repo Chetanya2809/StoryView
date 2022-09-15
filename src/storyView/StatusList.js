@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 50,
-    backgroundColor: 'red',
   },
   userNameText: {
     fontSize: 20,
