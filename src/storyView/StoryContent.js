@@ -34,6 +34,7 @@ const StoryContent = props => {
 
   const newStory = useCallback(() => {
     currentAnim = 0;
+
     if (props.story.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -43,6 +44,9 @@ const StoryContent = props => {
 
   const previousStory = useCallback( () => {
     currentAnim = 0;
+
+
+
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
