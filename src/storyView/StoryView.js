@@ -3,7 +3,8 @@ import {StyleSheet} from 'react-native';
 import StoryContent from './StoryContent';
 
 const StoryView = ({storyData}) => {
-  return <StoryContent story={storyData.stories} />;
+  console.log('storyData', storyData);
+  return <StoryContent story={storyData?.stories} />;
 };
 
 export default StoryView;

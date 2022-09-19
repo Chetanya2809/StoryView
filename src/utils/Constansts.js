@@ -56,8 +56,8 @@ const vidArr = [
     stories: [
       {
         id: 0,
-        url: 'https://images.unsplash.com/photo-1515578706925-0dc1a7bfc8cb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        type: 'image',
+        url: 'https://mobilecdn.6thstreet.com/AllBanners/bmt/13-05-2022+Women/HL+Videos+for+women/footwear.mp4',
+        type: 'video',
         duration: 10000,
         created: '2021-01-07T03:24:00',
       },

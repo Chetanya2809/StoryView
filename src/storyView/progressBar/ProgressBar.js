@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     marginTop: '10%',
-    // position: 'absolute',
+    position: 'absolute',
   },
   progressView: {
     height: 7,

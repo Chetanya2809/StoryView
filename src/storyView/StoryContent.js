@@ -1,17 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import Colors from '../utils/Colors';
 import React, {useState} from 'react';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
+import {StyleSheet, Image, Dimensions, View} from 'react-native';
 
 const height = Dimensions.get('window').width;
-console.log('hereee', height);
+
 const StoryContent = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -19,21 +13,21 @@ const StoryContent = props => {
     setCurrentIndex(param);
   };
   return (
-    <TouchableOpacity style={{flex: 1}}>
+    <View style={{flex: 1}}>
       <ProgressBar
         stories={props.story}
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-      {props.story[currentIndex].type == 'video' ? (
+      {props?.story[currentIndex]?.type == 'video' ? (
         <Video
-          source={{uri: props.story[currentIndex].url}}
+          source={{uri: props?.story[currentIndex].url}}
           resizeMode={'contain'}
-          // repeat={true}
           style={{
-            height: '100%',
+            height: '80%',
             width: height,
-            backgroundColor: 'black',
+            backgroundColor: Colors.black,
+            marginTop: '30%',
           }}
         />
       ) : (
@@ -43,7 +37,7 @@ const StoryContent = props => {
           source={{uri: props.story[currentIndex].url}}
         />
       )}
-    </TouchableOpacity>
+    </View>
   );
 };
 
