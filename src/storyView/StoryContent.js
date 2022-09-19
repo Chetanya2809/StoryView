@@ -27,8 +27,6 @@ const StoryContent = props => {
   };
 
   const changeStory = event => {
-    console.log('event', event);
-    console.log('width', width / 2);
     if (event.locationX > width / 2) {
       newStory();
     } else {
@@ -38,7 +36,7 @@ const StoryContent = props => {
 
   const newStory = () => {
     currentAnim = 0;
-    console.log('hereerererrerer', props.story.length);
+
     if (props.story.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -48,7 +46,7 @@ const StoryContent = props => {
 
   const previousStory = () => {
     currentAnim = 0;
-    console.log('hereerererrerer', props.story.length);
+
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
@@ -57,7 +55,6 @@ const StoryContent = props => {
   };
 
   const pauseStory = value => {
-    console.log(value);
     setPause(value);
   };
 
