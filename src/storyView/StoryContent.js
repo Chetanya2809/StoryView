@@ -1,15 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  TouchableOpacity,
-  Animated,
-} from 'react-native';
-import React, {useState, useRef, useEffect, createRef} from 'react';
+import React, {useState} from 'react';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
+import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -47,6 +39,8 @@ const StoryContent = props => {
   const previousStory = () => {
     currentAnim = 0;
 
+
+
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
@@ -81,13 +75,12 @@ const StoryContent = props => {
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-      {props.story[currentIndex].type == 'video' ? (
+      {props?.story[currentIndex]?.type == 'video' ? (
         <Video
-          source={{uri: props.story[currentIndex].url}}
+          source={{uri: props?.story[currentIndex].url}}
           resizeMode={'contain'}
-          // repeat={true}
+          style={styles.videoStyle}
           paused={isPause}
-          style={styles.videoPlayerDefaultStyle}
         />
       ) : (
         <Image
@@ -105,9 +98,8 @@ export default StoryContent;
 const styles = StyleSheet.create({
   parentContainer: {flex: 1},
   imageDefaultStyle: {height: '100%', width: '100%'},
-  videoPlayerDefaultStyle: {
-    width: width,
+  videoStyle: {
     height: '100%',
-    backgroundColor: 'black',
+    width: '100%',
   },
 });

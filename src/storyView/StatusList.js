@@ -15,16 +15,19 @@ import StoryContainer from './StoryContainer';
 
 const StatusList = () => {
   const [open, setOpen] = useState({open: false});
+
   const handleOpen = param => {
+    console.log('param', param);
     setOpen(param);
   };
+
   const onRender = ({item}) => {
     const {username, profile} = item;
 
     const onPressCard = () => {
       setTimeout(() => {
         setOpen({open: true, item});
-      }, 100);
+      }, 10);
     };
 
     return (
@@ -77,7 +80,6 @@ const styles = StyleSheet.create({
     height: 80,
     width: 80,
     borderRadius: 50,
-    backgroundColor: 'red',
   },
   userNameText: {
     fontSize: 20,

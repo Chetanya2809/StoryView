@@ -1,22 +1,24 @@
-import {StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
-import Modal from 'react-native-modal';
 import StoryView from './StoryView';
+import Colors from '../utils/Colors';
+import Modal from 'react-native-modal';
+import {StyleSheet} from 'react-native';
 
-const {height, width} = Dimensions.get('screen');
 const StoryContainer = ({open, handleOpen}) => {
+
+  const onCompleteSwipe = () => {
+    handleOpen({...open, open: false});
+  };
   return (
     <Modal
       isVisible={open.open}
       coverScreen={true}
+      swipeDirection="down"
+      onSwipeComplete={onCompleteSwipe}
       style={{
-        backgroundColor: 'black',
+        backgroundColor: Colors.black,
         margin: 0,
-
-        // height: height,
-        // width: width,
       }}>
-      {/* <ProgressBar /> */}
       <StoryView storyData={open.item} />
     </Modal>
   );

@@ -6,7 +6,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Colors from '../../utils/Colors';
-import React, {useEffect, useImperativeHandle, useRef, useState} from 'react';
+import React, {useEffect} from 'react';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
@@ -23,7 +23,6 @@ const ProgressBar = (
   ref,
 ) => {
   useEffect(() => {
-    console.log('ispaused', isPause);
     if (isPause) {
       anim.stopAnimation();
     } else animationFunction(currentAnim);
@@ -85,7 +84,10 @@ const ProgressBar = (
                   {
                     width: anim.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [0, width / stories.length - stories.length],
+                      outputRange: [
+                        0,
+                        width / stories.length - stories.length + 1,
+                      ],
                     }),
                   },
                 ]}
@@ -102,24 +104,27 @@ const ProgressBar = (
 
 const styles = StyleSheet.create({
   parentContainer: {
+    zIndex: 5,
+    elevation: 5,
+    width: width,
+    marginTop: '10%',
+    position: 'absolute',
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginTop: '10%',
-    // position: 'absolute',
   },
   progressView: {
-    height: 7,
-    borderRadius: 30,
+    height: 3,
+    borderRadius: 2,
     backgroundColor: Colors.red,
   },
   fixedView: {
-    borderWidth: 0.3,
-    borderRadius: 30,
+    height: 3,
+    borderRadius: 2,
     backgroundColor: Colors.warmGrey,
   },
   seenedView: {
-    height: 5,
-    borderRadius: 30,
+    height: 3,
+    borderRadius: 2,
   },
 });
 
