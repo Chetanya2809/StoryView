@@ -10,7 +10,7 @@ import {
 import React, {useState, useRef, useEffect, createRef} from 'react';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
-import {StyleSheet, Image, Dimensions, View} from 'react-native';
+
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -103,7 +103,7 @@ const StoryContent = props => {
           source={{uri: props.story[currentIndex].url}}
         />
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
