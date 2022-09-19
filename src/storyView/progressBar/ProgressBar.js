@@ -20,7 +20,7 @@ const ProgressBar = (
     currentAnim,
     getAnimatedValue,
   },
-  ref,
+
 ) => {
   useEffect(() => {
     if (isPause) {
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProgressBar;
+export default React.memo(ProgressBar);

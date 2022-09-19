@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
 import Video from 'react-native-video';
+import React, {useCallback, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
 import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
 
@@ -10,44 +10,52 @@ const StoryContent = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPause, setPause] = useState(false);
 
-  const _setCurrentIndex = param => {
-    setCurrentIndex(param);
-  };
+  const _setCurrentIndex = useCallback(
+    param => {
+      setCurrentIndex(param);
+    },
+    [currentIndex],
+  );
 
-  const _pauseCallBack = pause => {
-    setPause(pause);
-  };
+  const _pauseCallBack = useCallback(
+    pause => {
+      setPause(pause);
+    },
+    [isPause],
+  );
 
-  const changeStory = event => {
+  const changeStory = useCallback((event) => {
     if (event.locationX > width / 2) {
       newStory();
     } else {
       previousStory();
     }
-  };
+  },[currentIndex]);
 
-  const newStory = () => {
+  const newStory = useCallback(() => {
     currentAnim = 0;
     if (props.story.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setCurrentIndex(0);
     }
-  };
+  },[currentIndex]);
 
-  const previousStory = () => {
+  const previousStory = useCallback( () => {
     currentAnim = 0;
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
     }
-  };
+  },[currentIndex]);
 
-  const pauseStory = value => {
-    console.log(value);
-    setPause(value);
-  };
+  const pauseStory = useCallback(
+    value => {
+      setPause(value);
+    },
+    [isPause],
+  );
 
   return (
     <TouchableOpacity
@@ -90,8 +98,6 @@ const StoryContent = props => {
   );
 };
 
-export default StoryContent;
-
 const styles = StyleSheet.create({
   parentContainer: {flex: 1},
   imageDefaultStyle: {height: '100%', width: '100%'},
@@ -100,3 +106,5 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
+
+export default React.memo(StoryContent);
