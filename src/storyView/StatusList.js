@@ -8,18 +8,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Colors from '../utils/Colors';
-import React, {useState} from 'react';
 import Strings from '../utils/Strings';
 import vidArr from '../utils/Constansts';
 import StoryContainer from './StoryContainer';
+import React, {useCallback, useState} from 'react';
 
 const StatusList = () => {
   const [open, setOpen] = useState({open: false});
 
-  const handleOpen = param => {
-    console.log('param', param);
-    setOpen(param);
-  };
+  const handleOpen = useCallback(
+    param => {
+      setOpen(param);
+    },
+    [open],
+  );
 
   const onRender = ({item}) => {
     const {username, profile} = item;
@@ -51,8 +53,6 @@ const StatusList = () => {
     </SafeAreaView>
   );
 };
-
-export default StatusList;
 
 const styles = StyleSheet.create({
   parentContainer: {
@@ -89,3 +89,5 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
 });
+
+export default StatusList;
