@@ -72,7 +72,7 @@ const StoryContent = props => {
   }, []);
 
   const thumbnailLoader = () => {
-    return React.memo(
+    return (
       <Image
         resizeMode="contain"
         source={{uri: props?.story[currentIndex]?.thumbnailUrl}}
@@ -83,12 +83,12 @@ const StoryContent = props => {
             startAnim();
           }, 500);
         }}
-      />,
+      />
     );
   };
 
   const contentLoaded = () => {
-    return React.memo(
+    return (
       <>
         {props.story[currentIndex]?.type === 'video' ? (
           <Video
@@ -104,7 +104,7 @@ const StoryContent = props => {
             style={styles.imageDefaultStyle}
           />
         )}
-      </>,
+      </>
     );
   };
 
