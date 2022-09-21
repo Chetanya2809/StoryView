@@ -11,17 +11,15 @@ import React, {useEffect} from 'react';
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
-const ProgressBar = (
-  {
-    currentIndex,
-    setCurrentIndex,
-    stories,
-    isPause,
-    currentAnim,
-    getAnimatedValue,
-  },
-
-) => {
+const ProgressBar = ({
+  currentIndex,
+  setCurrentIndex,
+  stories,
+  startAnim,
+  isPause,
+  currentAnim,
+  getAnimatedValue,
+}) => {
   useEffect(() => {
     if (isPause) {
       anim.stopAnimation();
@@ -30,7 +28,8 @@ const ProgressBar = (
 
   useEffect(() => {
     anim.setValue(0);
-    animationFunction();
+    // animationFunction();
+    startAnim(animationFunction);
   }, [currentIndex]);
 
   useEffect(() => {
