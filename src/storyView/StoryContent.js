@@ -1,7 +1,13 @@
 import Video from 'react-native-video';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
-import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -9,6 +15,7 @@ let currentAnim = 0;
 const StoryContent = props => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPause, setPause] = useState(false);
+  const [loader, setLoader] = useState(true);
 
   const _setCurrentIndex = useCallback(
     param => {
@@ -24,13 +31,20 @@ const StoryContent = props => {
     [isPause],
   );
 
-  const changeStory = useCallback((event) => {
-    if (event.locationX > width / 2) {
-      newStory();
-    } else {
-      previousStory();
-    }
-  },[currentIndex]);
+  const changeStory = useCallback(
+    event => {
+      if (event.locationX > width / 2) {
+        newStory();
+      } else {
+        previousStory();
+      }
+    },
+    [currentIndex],
+  );
+
+  const startAnim = param => {
+    if (param) param();
+  };
 
   const newStory = useCallback(() => {
     currentAnim = 0;
@@ -40,23 +54,65 @@ const StoryContent = props => {
     } else {
       setCurrentIndex(0);
     }
-  },[currentIndex]);
+  }, [currentIndex]);
 
-  const previousStory = useCallback( () => {
+  const previousStory = useCallback(() => {
     currentAnim = 0;
-
-
 
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
     }
-  },[currentIndex]);
+  }, [currentIndex]);
 
-  const pauseStory = useCallback(
-    value => {
-      setPause(value);
+  const pauseStory = useCallback(() => {
+    console.log('pauseStory');
+    setPause(true);
+  }, []);
+
+  const thumbnailLoader = () => {
+    return (
+      <Image
+        resizeMode="contain"
+        source={{uri: props?.story[currentIndex]?.thumbnailUrl}}
+        style={styles.imageDefaultStyle}
+        onLoadEnd={() => {
+          setInterval(() => {
+            setLoader(false);
+            startAnim();
+          }, 500);
+        }}
+      />
+    );
+  };
+
+  const contentLoaded = () => {
+    return (
+      <>
+        {props.story[currentIndex]?.type === 'video' ? (
+          <Video
+            paused={isPause}
+            resizeMode={'contain'}
+            style={styles.videoStyle}
+            source={{uri: props?.story[currentIndex].url}}
+          />
+        ) : (
+          <Image
+            resizeMode="contain"
+            source={{uri: props?.story[currentIndex]?.url}}
+            style={styles.imageDefaultStyle}
+          />
+        )}
+      </>
+    );
+  };
+
+  const getAnimatedValue = useCallback(
+    anim => {
+      if (!isPause) {
+        currentAnim = anim;
+      }
     },
     [isPause],
   );
@@ -64,7 +120,7 @@ const StoryContent = props => {
   return (
     <TouchableOpacity
       delayLongPress={500}
-      onLongPress={() => pauseStory(true)}
+      onLongPress={pauseStory}
       onPressOut={() => {
         setPause(false);
       }}
@@ -72,32 +128,18 @@ const StoryContent = props => {
       activeOpacity={1}
       style={styles.parentContainer}>
       <ProgressBar
+        startAnim={startAnim}
         stories={props.story}
         isPause={isPause}
         setPause={_pauseCallBack}
-        getAnimatedValue={anim => {
-          if (!isPause) {
-            currentAnim = anim;
-          }
-        }}
+        getAnimatedValue={getAnimatedValue}
         currentAnim={currentAnim}
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-      {props?.story[currentIndex]?.type == 'video' ? (
-        <Video
-          source={{uri: props?.story[currentIndex].url}}
-          resizeMode={'contain'}
-          style={styles.videoStyle}
-          paused={isPause}
-        />
-      ) : (
-        <Image
-          resizeMode="contain"
-          style={styles.imageDefaultStyle}
-          source={{uri: props.story[currentIndex].url}}
-        />
-      )}
+
+      {loader ? thumbnailLoader() : contentLoaded()}
+      {/* {loader && contentLoaded()} */}
     </TouchableOpacity>
   );
 };
