@@ -24,13 +24,16 @@ const StoryContent = props => {
     [isPause],
   );
 
-  const changeStory = useCallback((event) => {
-    if (event.locationX > width / 2) {
-      newStory();
-    } else {
-      previousStory();
-    }
-  },[currentIndex]);
+  const changeStory = useCallback(
+    event => {
+      if (event.locationX > width / 2) {
+        newStory();
+      } else {
+        previousStory();
+      }
+    },
+    [currentIndex],
+  );
 
   const newStory = useCallback(() => {
     currentAnim = 0;
@@ -40,19 +43,17 @@ const StoryContent = props => {
     } else {
       setCurrentIndex(0);
     }
-  },[currentIndex]);
+  }, [currentIndex]);
 
-  const previousStory = useCallback( () => {
+  const previousStory = useCallback(() => {
     currentAnim = 0;
-
-
 
     if (currentIndex > 0 && props.story.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
     }
-  },[currentIndex]);
+  }, [currentIndex]);
 
   const pauseStory = useCallback(
     value => {

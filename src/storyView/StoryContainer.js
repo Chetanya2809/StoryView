@@ -7,6 +7,8 @@ const StoryContainer = ({open, handleOpen}) => {
   const onCompleteSwipe = () => {
     handleOpen({...open, open: false});
   };
+  
+  console.time('StoryContainer')
   return (
     <Modal
       isVisible={open.open}
@@ -16,7 +18,8 @@ const StoryContainer = ({open, handleOpen}) => {
       style={{
         backgroundColor: Colors.black,
         margin: 0,
-      }}>
+      }}
+      >
       <StoryView storyData={open.item} />
     </Modal>
   );
