@@ -5,8 +5,8 @@ import {
   Dimensions,
   SafeAreaView,
 } from 'react-native';
-import Colors from '../../utils/Colors';
 import React, {useEffect} from 'react';
+import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
@@ -28,7 +28,6 @@ const ProgressBar = ({
 
   useEffect(() => {
     anim.setValue(0);
-    // animationFunction();
     startAnim(animationFunction);
   }, [currentIndex]);
 
