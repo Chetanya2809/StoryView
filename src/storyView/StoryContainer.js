@@ -8,8 +8,7 @@ const StoryContainer = ({open, handleOpen}) => {
   const onCompleteSwipe = () => {
     handleOpen({...open, open: false});
   };
-  
-  console.time('StoryContainer')
+
   return (
     <Modal
       isVisible={open.open}
@@ -22,11 +21,11 @@ const StoryContainer = ({open, handleOpen}) => {
   );
 };
 
-export default React.memo(StoryContainer);
-
 const styles = StyleSheet.create({
   modalStyle: {
-    backgroundColor: Colors.black,
     margin: 0,
+    backgroundColor: Colors.black,
   },
 });
+
+export default React.memo(StoryContainer);

@@ -72,21 +72,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.warmGrey,
   },
   listContainerView: {
-    flexDirection: 'row',
     height: 100,
     padding: 10,
+    flexDirection: 'row',
   },
   profileImage: {
-    height: 80,
     width: 80,
+    height: 80,
     borderRadius: 50,
   },
   userNameText: {
     fontSize: 20,
-    color: Colors.white,
-    marginTop: 30,
     fontSize: 20,
+    marginTop: 30,
     marginLeft: 20,
+    color: Colors.white,
   },
 });
 
