@@ -1,8 +1,8 @@
 import React from 'react';
-import StoryContainer from './src/StoryContainer';
+import MyRoutes from './src/routes/MyRoutes';
 
 const App = () => {
-  return <StoryContainer />;
+  return <MyRoutes />;
 };
 
 export default App;
