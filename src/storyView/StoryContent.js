@@ -1,4 +1,17 @@
 import Video from 'react-native-video';
+
+import React, {useCallback, useRef, useState} from 'react';
+import ProgressBar from './progressBar/ProgressBar';
+import {
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  View,
+  Animated,
+  ActivityIndicator,
+} from 'react-native';
+
 import React, {useCallback, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
 import {
@@ -11,13 +24,19 @@ import {
 } from 'react-native';
 import StoryHeader from '../components/header/StoryHeader';
 
+
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
 
+const AnimatedVideo = Animated.createAnimatedComponent(Video);
+
 const StoryContent = props => {
+  const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPause, setPause] = useState(false);
   const [loader, setLoader] = useState(true);
+  const fadeAnimation = useRef(new Animated.Value(1)).current;
+  const opacityAnimation = useRef(new Animated.Value(0)).current;
 
   const _setCurrentIndex = useCallback(
     param => {
@@ -45,6 +64,12 @@ const StoryContent = props => {
   );
 
   const startAnim = param => {
+    Animated.timing(fadeAnimation, {
+      toValue: 0,
+      duration: 300,
+      delay: 200,
+      useNativeDriver: true,
+    }).start();
     if (param) param();
   };
 
@@ -74,35 +99,82 @@ const StoryContent = props => {
 
   const thumbnailLoader = () => {
     return (
-      <Image
+      <Animated.Image
         resizeMode="contain"
         source={{uri: props?.story[currentIndex]?.thumbnailUrl}}
-        style={styles.imageDefaultStyle}
+        style={[
+          styles.imageDefaultStyle,
+          {
+            opacity: fadeAnimation,
+          },
+        ]}
         onLoadEnd={() => {
           setInterval(() => {
             setLoader(false);
             startAnim();
-          }, 500);
+          }, 300);
         }}
       />
     );
+  };
+
+  const startAnimation = () => {
+    setIsLoading(true);
+    Animated.timing(opacityAnimation, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
   };
 
   const contentLoaded = () => {
     return (
       <>
         {props.story[currentIndex]?.type === 'video' ? (
-          <Video
-            paused={isPause}
-            resizeMode={'contain'}
-            style={styles.videoStyle}
-            source={{uri: props?.story[currentIndex].url}}
-          />
+          <View>
+            <AnimatedVideo
+              onLoadStart={startAnimation}
+              paused={isPause}
+              resizeMode={'contain'}
+              onLoad={() => {
+                setTimeout(() => {
+                  setIsLoading(false);
+                }, 300);
+              }}
+              style={[
+                styles.videoStyle,
+                {
+                  opacity: opacityAnimation,
+                },
+              ]}
+              source={{uri: props?.story[currentIndex].url}}
+            />
+            {isLoading ? (
+              <ActivityIndicator
+                color={'red'}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              />
+            ) : null}
+          </View>
         ) : (
-          <Image
+          <Animated.Image
+            onLoadStart={startAnimation}
             resizeMode="contain"
             source={{uri: props?.story[currentIndex]?.url}}
-            style={styles.imageDefaultStyle}
+            style={[
+              styles.imageDefaultStyle,
+              {
+                opacity: opacityAnimation,
+              },
+            ]}
           />
         )}
       </>
