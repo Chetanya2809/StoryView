@@ -12,11 +12,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import React, {useCallback, useState} from 'react';
-import ProgressBar from './progressBar/ProgressBar';
-import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
-
-
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
 
