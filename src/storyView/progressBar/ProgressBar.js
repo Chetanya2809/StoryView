@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import Colors from '../../utils/Colors';
+import StoryHeader from '../../components/header/StoryHeader';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
@@ -96,6 +97,7 @@ const ProgressBar = ({
           </View>
         );
       })}
+      <StoryHeader />
     </SafeAreaView>
   );
 };

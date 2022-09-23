@@ -1,7 +1,15 @@
 import Video from 'react-native-video';
 import React, {useCallback, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
-import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  View,
+} from 'react-native';
+import StoryHeader from '../components/header/StoryHeader';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
