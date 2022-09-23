@@ -1,4 +1,5 @@
 import Video from 'react-native-video';
+
 import React, {useCallback, useRef, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
 import {
@@ -10,6 +11,11 @@ import {
   Animated,
   ActivityIndicator,
 } from 'react-native';
+
+import React, {useCallback, useState} from 'react';
+import ProgressBar from './progressBar/ProgressBar';
+import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -81,7 +87,6 @@ const StoryContent = props => {
   }, [currentIndex]);
 
   const pauseStory = useCallback(() => {
-    console.log('pauseStory');
     setPause(true);
   }, []);
 
@@ -205,12 +210,12 @@ const StoryContent = props => {
 };
 
 const styles = StyleSheet.create({
+  videoStyle: {
+    width: '100%',
+    height: '100%',
+  },
   parentContainer: {flex: 1},
   imageDefaultStyle: {height: '100%', width: '100%'},
-  videoStyle: {
-    height: '100%',
-    width: '100%',
-  },
 });
 
 export default React.memo(StoryContent);
