@@ -49,14 +49,15 @@ const StoryContent = props => {
     [currentIndex],
   );
 
-  const startAnim = param => {
+  const startAnim = animationStart => {
+    console.log('my Value', animationStart);
     Animated.timing(fadeAnimation, {
       toValue: 0,
       duration: 300,
       delay: 200,
       useNativeDriver: true,
     }).start();
-    if (param) param();
+    if (animationStart) animationStart();
   };
 
   const newStory = useCallback(() => {
