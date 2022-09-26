@@ -12,7 +12,6 @@ const vidArr = [
         type: 'image',
         duration: 10000,
         created: '2021-01-07T03:24:00',
-        thumbnailUrl: '',
       },
     ],
   },

@@ -14,6 +14,7 @@ import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 
 const StatusList = () => {
+  console.log("yiuthrgtbhynm,ipo'poi,mujnyh", vidArr);
   const [open, setOpen] = useState({open: false});
 
   const handleOpen = useCallback(
@@ -28,6 +29,7 @@ const StatusList = () => {
 
     const onPressCard = () => {
       setTimeout(() => {
+        console.log('item', item);
         setOpen({open: true, item});
       }, 10);
     };
