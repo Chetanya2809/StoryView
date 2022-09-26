@@ -6,12 +6,8 @@ import {
   Image,
   Text,
   StyleSheet,
-  Dimensions,
-  TouchableOpacity,
   View,
   Animated,
-  Dimensions,
-  StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
@@ -183,14 +179,14 @@ const StoryContent = props => {
     );
   };
 
-  const getAnimatedValue = useCallback(
-    anim => {
-      if (!isPause) {
-        currentAnim = anim;
-      }
-    },
-    [isPause],
-  );
+  // const getAnimatedValue = useCallback(
+  //   anim => {
+  //     if (!isPause) {
+  //       currentAnim = anim;
+  //     }
+  //   },
+  //   [isPause],
+  // );
 
   // const _renderItem = ({item}) => {
   //   return (
