@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Colors from '../utils/Colors';
-import Strings from '../utils/Strings';
 import vidArr from '../utils/Constansts';
 import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
@@ -25,7 +24,6 @@ const StatusList = () => {
 
   const onRender = ({item}) => {
     const {username, profile} = item;
-
     const onPressCard = () => {
       setTimeout(() => {
         setOpen({open: true, item});
@@ -46,7 +44,7 @@ const StatusList = () => {
   };
   return (
     <SafeAreaView style={styles.parentContainer}>
-      <Text style={styles.headerText}>{Strings.status}</Text>
+      <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
       <StoryContainer open={open} handleOpen={handleOpen} />
       <FlatList data={vidArr} renderItem={onRender} />
@@ -90,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StatusList;
+export default React.memo(StatusList);
