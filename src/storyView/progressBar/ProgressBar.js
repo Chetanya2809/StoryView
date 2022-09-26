@@ -1,24 +1,18 @@
-import {
-  View,
-  Animated,
-  StyleSheet,
-  Dimensions,
-  SafeAreaView,
-} from 'react-native';
 import React, {useEffect} from 'react';
 import Colors from '../../utils/Colors';
+import StoryHeader from '../../components/header/StoryHeader';
+import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
 const ProgressBar = ({
-  currentIndex,
-  setCurrentIndex,
   stories,
   loader,
   startAnim,
-  isPause,
   currentAnim,
+  currentIndex,
+  setCurrentIndex,
   getAnimatedValue,
 }) => {
   useEffect(() => {
@@ -71,41 +65,48 @@ const ProgressBar = ({
   };
 
   return (
-    <SafeAreaView style={styles.parentContainer}>
-      {stories.map((item, index) => {
-        return (
-          <View
-            key={index}
-            style={[
-              {width: width / stories.length - 3},
-              styles.fixedView,
-              {
-                backgroundColor:
-                  index < currentIndex ? Colors.red : Colors.warmGrey,
-              },
-            ]}>
-            {index === currentIndex ? (
-              <Animated.View
-                style={[
-                  styles.progressView,
-                  {
-                    width: anim.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [
-                        0,
-                        width / stories.length - stories.length + 1,
-                      ],
-                    }),
-                  },
-                ]}
-              />
-            ) : (
-              <View style={styles.seenedView} />
-            )}
-          </View>
-        );
-      })}
-    </SafeAreaView>
+    <>
+      <View style={styles.parentContainer}>
+        {stories.map((item, index) => {
+          return (
+            <View
+              key={index}
+              style={[
+                {width: width / stories.length - 3},
+                styles.fixedView,
+                {
+                  backgroundColor:
+                    index < currentIndex ? Colors.red : Colors.warmGrey,
+                },
+              ]}>
+              {index === currentIndex ? (
+                <Animated.View
+                  style={[
+                    styles.progressView,
+                    {
+                      width: anim.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [
+                          0,
+                          width / stories.length - stories.length + 1,
+                        ],
+                      }),
+                    },
+                  ]}
+                />
+              ) : (
+                <View style={styles.seenedView} />
+              )}
+            </View>
+          );
+        })}
+      </View>
+      <StoryHeader
+        profile={profile}
+        userName={userName}
+        createdAt={stories[currentIndex]?.created}
+      />
+    </>
   );
 };
 

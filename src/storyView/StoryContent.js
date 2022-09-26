@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   View,
   Animated,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 // import {FlatList} from 'react-native-gesture-handler';
@@ -21,10 +24,10 @@ let currentAnim = 0;
 const AnimatedVideo = Animated.createAnimatedComponent(Video);
 
 const StoryContent = props => {
+  const [loader, setLoader] = useState(true);
+  const [isPause, setPause] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPause, setPause] = useState(false);
-  const [loader, setLoader] = useState(true);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
 
@@ -125,6 +128,15 @@ const StoryContent = props => {
     }).start();
   };
 
+  const getAnimatedValue = useCallback(
+    anim => {
+      if (!isPause) {
+        currentAnim = anim;
+      }
+    },
+    [isPause],
+  );
+
   const contentLoaded = () => {
     return (
       <>
@@ -149,16 +161,8 @@ const StoryContent = props => {
             />
             {isLoading ? (
               <ActivityIndicator
-                color={'red'}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
+                color={Colors.red}
+                style={styles.indicatorStyle}
               />
             ) : null}
           </View>
@@ -230,6 +234,8 @@ const StoryContent = props => {
         startAnim={startAnim}
         loader={loader}
         stories={props.story}
+        profile={props.profile}
+        userName={props.userName}
         isPause={isPause}
         setPause={_pauseCallBack}
         getAnimatedValue={getAnimatedValue}
@@ -237,7 +243,6 @@ const StoryContent = props => {
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-
       {loader ? thumbnailLoader() : contentLoaded()}
     </TouchableOpacity>
 
@@ -261,6 +266,15 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   parentContainer: {flex: 1},
+  indicatorStyle: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    position: 'absolute',
+    justifyContent: 'center',
+  },
   imageDefaultStyle: {height: '100%', width: '100%'},
 });
 
