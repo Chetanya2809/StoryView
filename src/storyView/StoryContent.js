@@ -8,9 +8,11 @@ import {
   StyleSheet,
   View,
   Animated,
+  Dimensions,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+import Colors from '../utils/Colors';
 // import {FlatList} from 'react-native-gesture-handler';
 // import vidArr from '../utils/Constansts';
 

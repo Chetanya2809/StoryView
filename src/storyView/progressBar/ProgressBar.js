@@ -9,6 +9,9 @@ var anim = new Animated.Value(0);
 const ProgressBar = ({
   stories,
   loader,
+  isPause,
+  profile,
+  userName,
   startAnim,
   currentAnim,
   currentIndex,
