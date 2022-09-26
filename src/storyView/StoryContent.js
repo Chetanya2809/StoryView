@@ -1,29 +1,15 @@
-import Video from 'react-native-video';
-
-import React, {useCallback, useRef, useState} from 'react';
-import ProgressBar from './progressBar/ProgressBar';
 import {
-  Image,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
   View,
   Animated,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
-
-import React, {useCallback, useState} from 'react';
+import Colors from '../utils/Colors';
+import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
-import {
-  Image,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  Text,
-  View,
-} from 'react-native';
-import StoryHeader from '../components/header/StoryHeader';
-
+import React, {useCallback, useRef, useState} from 'react';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -31,10 +17,10 @@ let currentAnim = 0;
 const AnimatedVideo = Animated.createAnimatedComponent(Video);
 
 const StoryContent = props => {
+  const [loader, setLoader] = useState(true);
+  const [isPause, setPause] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPause, setPause] = useState(false);
-  const [loader, setLoader] = useState(true);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0)).current;
 
@@ -127,6 +113,15 @@ const StoryContent = props => {
     }).start();
   };
 
+  const getAnimatedValue = useCallback(
+    anim => {
+      if (!isPause) {
+        currentAnim = anim;
+      }
+    },
+    [isPause],
+  );
+
   const contentLoaded = () => {
     return (
       <>
@@ -151,16 +146,8 @@ const StoryContent = props => {
             />
             {isLoading ? (
               <ActivityIndicator
-                color={'red'}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
+                color={Colors.red}
+                style={styles.indicatorStyle}
               />
             ) : null}
           </View>
@@ -181,15 +168,6 @@ const StoryContent = props => {
     );
   };
 
-  const getAnimatedValue = useCallback(
-    anim => {
-      if (!isPause) {
-        currentAnim = anim;
-      }
-    },
-    [isPause],
-  );
-
   return (
     <TouchableOpacity
       delayLongPress={500}
@@ -203,6 +181,8 @@ const StoryContent = props => {
       <ProgressBar
         startAnim={startAnim}
         stories={props.story}
+        profile={props.profile}
+        userName={props.userName}
         isPause={isPause}
         setPause={_pauseCallBack}
         getAnimatedValue={getAnimatedValue}
@@ -210,7 +190,6 @@ const StoryContent = props => {
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
       />
-
       {loader ? thumbnailLoader() : contentLoaded()}
     </TouchableOpacity>
   );
@@ -222,6 +201,15 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   parentContainer: {flex: 1},
+  indicatorStyle: {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: 'center',
+    position: 'absolute',
+    justifyContent: 'center',
+  },
   imageDefaultStyle: {height: '100%', width: '100%'},
 });
 
