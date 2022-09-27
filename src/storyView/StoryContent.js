@@ -10,7 +10,6 @@ import Colors from '../utils/Colors';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
 import React, {useCallback, useRef, useState} from 'react';
-import vidArr from '../utils/Constansts';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -77,9 +76,6 @@ const StoryContent = props => {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
-      // if(props.index >= 0)
-      // console.log('hahahahahahahha');
-      // props.handleOpen({...props.open,open : true, item : vidArr[props.index -1], index : props.index-1})
     }
   }, [currentIndex]);
 

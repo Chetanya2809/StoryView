@@ -37,22 +37,7 @@ const StatusList = () => {
           activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
-          {/* <Svg width="100" height="100" viewBox="0 0 100 100">
-            <Circle
-              cx="50"
-              cy="50"
-              r="48"
-              fill="none"
-              stroke="green"
-              stroke-width="4"
-              stroke-dasharray="150 2"
-              stroke-dashoffset="-2"
-            />
-          </Svg> */}
-          <Svg
-            width="100"
-            height="100"
-            viewBox="0 0 100 100">
+          <Svg width="100" height="100" viewBox="0 0 100 100">
             <Circle
               cx="50"
               cy="50"
@@ -64,11 +49,7 @@ const StatusList = () => {
               strokeDashoffset={-2}
             />
 
-            <Image
-              //  x={'50'} y={'50'} height={80} width={80}
-              source={{uri: profile}}
-              style={styles.profileImage}
-            />
+            <Image source={{uri: profile}} style={styles.profileImage} />
           </Svg>
 
           <Text style={styles.userNameText}>{username}</Text>
