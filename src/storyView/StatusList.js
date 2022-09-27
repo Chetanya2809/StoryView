@@ -9,12 +9,12 @@ import {
 } from 'react-native';
 import Colors from '../utils/Colors';
 import vidArr from '../utils/Constansts';
+import Svg, {Circle} from 'react-native-svg';
 import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 
 const StatusList = () => {
-  console.log("yiuthrgtbhynm,ipo'poi,mujnyh", vidArr);
-  const [open, setOpen] = useState({open: false});
+  const [open, setOpen] = useState({open: false, index: 0, item: {}});
 
   const handleOpen = useCallback(
     param => {
@@ -23,33 +23,47 @@ const StatusList = () => {
     [open],
   );
 
-  const onRender = ({item}) => {
+  const onRender = ({item, index}) => {
     const {username, profile} = item;
     const onPressCard = () => {
       setTimeout(() => {
-        console.log('item', item);
-        setOpen({open: true, item});
+        setOpen({open: true, item: vidArr[index], index});
       }, 10);
     };
 
     return (
-      <>
+      <React.Fragment>
         <TouchableOpacity
+          activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
-          <Image source={{uri: profile}} style={styles.profileImage} />
+          <Svg width="100" height="100" viewBox="0 0 100 100">
+            <Circle
+              cx="50"
+              cy="50"
+              r="48"
+              fill="none"
+              stroke="green"
+              strokeWidth={4}
+              strokeDasharray="100 2"
+              strokeDashoffset={-2}
+            />
+
+            <Image source={{uri: profile}} style={styles.profileImage} />
+          </Svg>
+
           <Text style={styles.userNameText}>{username}</Text>
         </TouchableOpacity>
         <View style={styles.topSeperatorView} />
-      </>
+      </React.Fragment>
     );
   };
   return (
     <SafeAreaView style={styles.parentContainer}>
       <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
-      <StoryContainer open={open} handleOpen={handleOpen} />
-      <FlatList data={vidArr} renderItem={onRender} />
+      <StoryContainer data={open.item} open={open} handleOpen={handleOpen} />
+      <FlatList data={vidArr} renderItem={onRender} bounces={false} />
     </SafeAreaView>
   );
 };
@@ -75,11 +89,15 @@ const styles = StyleSheet.create({
     height: 100,
     padding: 10,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   profileImage: {
     width: 80,
     height: 80,
     borderRadius: 50,
+    position: 'relative',
+    alignSelf: 'center',
+    marginVertical: 10,
   },
   userNameText: {
     fontSize: 20,

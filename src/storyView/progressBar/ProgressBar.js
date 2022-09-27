@@ -7,12 +7,14 @@ const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
 const ProgressBar = ({
+  open,
   stories,
   loader,
   isPause,
   profile,
   userName,
   startAnim,
+  handleOpen,
   currentAnim,
   currentIndex,
   setCurrentIndex,
@@ -31,7 +33,6 @@ const ProgressBar = ({
 
   useEffect(() => {
     anim.addListener(({value}) => {
-      console.log('myvalues', value);
       if (value != 1) getAnimatedValue(value);
     });
 
@@ -105,7 +106,9 @@ const ProgressBar = ({
         })}
       </View>
       <StoryHeader
+        handleOpen={handleOpen}
         profile={profile}
+        open={open}
         userName={userName}
         createdAt={stories[currentIndex]?.created}
       />
