@@ -16,7 +16,12 @@ const StoryContainer = ({open, handleOpen}) => {
       swipeDirection="down"
       onSwipeComplete={onCompleteSwipe}
       style={styles.modalStyle}>
-      <StoryView storyData={open.item} />
+      <StoryView
+        open={open}
+        handleOpen={handleOpen}
+        storyData={open.item}
+        index={open.index}
+      />
     </Modal>
   );
 };

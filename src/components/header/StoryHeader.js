@@ -10,10 +10,17 @@ import React from 'react';
 import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
-const StoryHeader = ({profile, userName, createdAt}) => {
+const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
+  const onBackPress = () => {
+    handleOpen({...open, open: false});
+  };
+
   return (
     <View style={styles.parentView}>
-      <TouchableOpacity style={styles.leftIconView} activeOpacity={0.8}>
+      <TouchableOpacity
+        style={styles.leftIconView}
+        activeOpacity={0.8}
+        onPress={onBackPress}>
         <Image
           source={require('../../assets/images/arrow.png')}
           style={styles.leftIcon}

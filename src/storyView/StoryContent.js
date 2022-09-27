@@ -10,6 +10,7 @@ import Colors from '../utils/Colors';
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
 import React, {useCallback, useRef, useState} from 'react';
+import vidArr from '../utils/Constansts';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -72,10 +73,13 @@ const StoryContent = props => {
   const previousStory = useCallback(() => {
     currentAnim = 0;
 
-    if (currentIndex > 0 && props.story.length) {
+    if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
+      // if(props.index >= 0)
+      // console.log('hahahahahahahha');
+      // props.handleOpen({...props.open,open : true, item : vidArr[props.index -1], index : props.index-1})
     }
   }, [currentIndex]);
 
@@ -184,7 +188,9 @@ const StoryContent = props => {
         profile={props.profile}
         userName={props.userName}
         isPause={isPause}
+        open={props.open}
         setPause={_pauseCallBack}
+        handleOpen={props?.handleOpen}
         getAnimatedValue={getAnimatedValue}
         currentAnim={currentAnim}
         currentIndex={currentIndex}
