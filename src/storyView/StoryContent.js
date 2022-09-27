@@ -1,20 +1,15 @@
-import Video from 'react-native-video';
-
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import ProgressBar from './progressBar/ProgressBar';
 import {
-  Image,
-  Text,
-  StyleSheet,
   View,
   Animated,
+  StyleSheet,
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import Colors from '../utils/Colors';
-// import {FlatList} from 'react-native-gesture-handler';
-// import vidArr from '../utils/Constansts';
+import Video from 'react-native-video';
+import ProgressBar from './progressBar/ProgressBar';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -118,7 +113,6 @@ const StoryContent = props => {
 
   const startAnimation = () => {
     setIsLoading(true);
-
     Animated.timing(opacityAnimation, {
       toValue: 1,
       duration: 1000,

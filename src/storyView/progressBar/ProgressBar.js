@@ -33,7 +33,6 @@ const ProgressBar = ({
 
   useEffect(() => {
     anim.addListener(({value}) => {
-      console.log('myvalues', value);
       if (value != 1) getAnimatedValue(value);
     });
 

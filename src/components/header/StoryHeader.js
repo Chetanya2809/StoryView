@@ -23,7 +23,7 @@ const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
     let current;
     if (days >= 1) {
       current = days == 1 ? 'day' : 'yesterday';
-      return Math.trunc(days) + ' ' + current;
+      return  current;
     } else if (hours > 1) {
       current = days == 1 ? 'hour' : 'hours';
       return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
   profileStyle: {height: '100%', width: '100%'},
   usernameStyle: {color: Colors.white, fontSize: 17, fontWeight: 'bold'},
-  storyTimeStyle: {fontSize: 10, color: Colors.white, marginTop: 3},
+  storyTimeStyle: {fontSize: 15, color: Colors.white, marginTop: 3},
   userDetailsView: {paddingLeft: 10},
 });
 
