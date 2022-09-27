@@ -1,15 +1,20 @@
+import Video from 'react-native-video';
+
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import ProgressBar from './progressBar/ProgressBar';
 import {
+  Image,
+  Text,
+  StyleSheet,
   View,
   Animated,
   Dimensions,
-  StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
 import Colors from '../utils/Colors';
-import Video from 'react-native-video';
-import ProgressBar from './progressBar/ProgressBar';
-import React, {useCallback, useRef, useState} from 'react';
+// import {FlatList} from 'react-native-gesture-handler';
+// import vidArr from '../utils/Constansts';
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -22,7 +27,7 @@ const StoryContent = props => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
-  const opacityAnimation = useRef(new Animated.Value(0)).current;
+  const opacityAnimation = useRef(new Animated.Value(0.3)).current;
 
   const _setCurrentIndex = useCallback(
     param => {
@@ -49,14 +54,21 @@ const StoryContent = props => {
     [currentIndex],
   );
 
-  const startAnim = param => {
+  useEffect(() => {
+    return () => {
+      fadeAnimation.stopAnimation();
+      fadeAnimation.removeListener();
+    };
+  }, []);
+  const startAnim = animationStart => {
     Animated.timing(fadeAnimation, {
       toValue: 0,
       duration: 300,
       delay: 200,
       useNativeDriver: true,
     }).start();
-    if (param) param();
+
+    if (animationStart) animationStart(0);
   };
 
   const newStory = useCallback(() => {
@@ -95,7 +107,7 @@ const StoryContent = props => {
           },
         ]}
         onLoadEnd={() => {
-          setInterval(() => {
+          setTimeout(() => {
             setLoader(false);
             startAnim();
           }, 300);
@@ -106,6 +118,7 @@ const StoryContent = props => {
 
   const startAnimation = () => {
     setIsLoading(true);
+
     Animated.timing(opacityAnimation, {
       toValue: 1,
       duration: 1000,
@@ -142,7 +155,7 @@ const StoryContent = props => {
                   opacity: opacityAnimation,
                 },
               ]}
-              source={{uri: props?.story[currentIndex].url}}
+              source={{uri: props?.story[currentIndex]?.url}}
             />
             {isLoading ? (
               <ActivityIndicator
@@ -168,6 +181,43 @@ const StoryContent = props => {
     );
   };
 
+  // const getAnimatedValue = useCallback(
+  //   anim => {
+  //     if (!isPause) {
+  //       currentAnim = anim;
+  //     }
+  //   },
+  //   [isPause],
+  // );
+
+  // const _renderItem = ({item}) => {
+  //   return (
+  //     <TouchableOpacity
+  //       delayLongPress={500}
+  //       onLongPress={pauseStory}
+  //       onPressOut={() => {
+  //         setPause(false);
+  //       }}
+  //       onPress={event => changeStory(event.nativeEvent)}
+  //       activeOpacity={1}
+  //       style={styles.parentContainer}>
+  //       <ProgressBar
+  //         startAnim={startAnim}
+  //         loader={loader}
+  //         stories={props.story}
+  //         isPause={isPause}
+  //         setPause={_pauseCallBack}
+  //         getAnimatedValue={getAnimatedValue}
+  //         currentAnim={currentAnim}
+  //         currentIndex={currentIndex}
+  //         setCurrentIndex={_setCurrentIndex}
+  //       />
+
+  //       {loader ? thumbnailLoader() : contentLoaded()}
+  //     </TouchableOpacity>
+  //   );
+  // };
+
   return (
     <TouchableOpacity
       delayLongPress={500}
@@ -180,6 +230,7 @@ const StoryContent = props => {
       style={styles.parentContainer}>
       <ProgressBar
         startAnim={startAnim}
+        loader={loader}
         stories={props.story}
         profile={props.profile}
         userName={props.userName}
@@ -194,6 +245,18 @@ const StoryContent = props => {
       />
       {loader ? thumbnailLoader() : contentLoaded()}
     </TouchableOpacity>
+
+    // <View style={{height: height}}>
+    //   <FlatList
+    //     bounces={false}
+    //     data={vidArr}
+    //     renderItem={_renderItem}
+    //     pagingEnabled={true}
+    //     // snapToInterval={width}
+    //     // decelerationRate={0}
+    //     horizontal={true}
+    //   />
+    // </View>
   );
 };
 

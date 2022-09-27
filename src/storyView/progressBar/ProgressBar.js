@@ -9,8 +9,9 @@ var anim = new Animated.Value(0);
 const ProgressBar = ({
   open,
   stories,
-  profile,
+  loader,
   isPause,
+  profile,
   userName,
   startAnim,
   handleOpen,
@@ -27,11 +28,19 @@ const ProgressBar = ({
 
   useEffect(() => {
     anim.setValue(0);
-    startAnim(animationFunction);
-  }, [currentIndex]);
+    !loader && startAnim(animationFunction);
+  }, [currentIndex, loader]);
 
   useEffect(() => {
-    anim.addListener(({value}) => getAnimatedValue(value));
+    anim.addListener(({value}) => {
+      console.log('myvalues', value);
+      if (value != 1) getAnimatedValue(value);
+    });
+
+    return () => {
+      anim.stopAnimation();
+      anim.removeListener();
+    };
   }, []);
 
   const animationFunction = (currentAnim = 0) => {

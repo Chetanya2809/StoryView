@@ -11,6 +11,28 @@ import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
 const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
+  const convertDate = date => {
+    console.log('date', date);
+
+    let startDate = new Date(date);
+    let endDate = new Date();
+    let seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+    let minutes = seconds / 60;
+    let hours = minutes / 60;
+    let days = hours / 24;
+    let current;
+    if (days >= 1) {
+      current = days == 1 ? 'day' : 'yesterday';
+      return Math.trunc(days) + ' ' + current;
+    } else if (hours > 1) {
+      current = days == 1 ? 'hour' : 'hours';
+      return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
+    } else {
+      current = minutes == 1 ? 'minute' : 'minutes';
+      return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
+    }
+  };
+
   const onBackPress = () => {
     handleOpen({...open, open: false});
   };
@@ -31,7 +53,9 @@ const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
       </View>
       <View style={styles.userDetailsView}>
         <Text style={styles.usernameStyle}>{userName}</Text>
-        <Text style={styles.storyTimeStyle}>{createdAt}</Text>
+        <Text style={styles.storyTimeStyle}>
+          {createdAt && convertDate(createdAt)}
+        </Text>
       </View>
     </View>
   );
