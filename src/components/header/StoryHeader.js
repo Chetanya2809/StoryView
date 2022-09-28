@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Dimensions,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import React from 'react';
 import Colors from '../../utils/Colors';
@@ -91,14 +92,18 @@ const styles = StyleSheet.create({
   profileView: {
     marginLeft: 20,
     borderRadius: 50,
-    width: width / 10,
     overflow: 'hidden',
     height: height / 22,
     backgroundColor: Colors.darkWhite,
+    width: Platform.OS === 'ios' ? width / 10 : width / 12,
   },
   profileStyle: {height: '100%', width: '100%'},
   usernameStyle: {color: Colors.white, fontSize: 17, fontWeight: 'bold'},
-  storyTimeStyle: {fontSize: 15, color: Colors.white, marginTop: 3},
+  storyTimeStyle: {
+    fontSize: 15,
+    color: Colors.white,
+    marginTop: Platform.OS === 'ios' ? 3 : 0,
+  },
   userDetailsView: {paddingLeft: 10},
 });
 
