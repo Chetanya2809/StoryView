@@ -27,7 +27,7 @@ const StatusList = () => {
     const {username, profile} = item;
     const onPressCard = () => {
       setTimeout(() => {
-        setOpen({open: true, item: vidArr[index], index});
+        setOpen({open: true, item});
       }, 10);
     };
 
@@ -37,19 +37,23 @@ const StatusList = () => {
           activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
-          <Svg width="100" height="100" viewBox="0 0 100 100">
+          <Svg width="90" height="90" viewBox="0 0 100 100">
             <Circle
               cx="50"
               cy="50"
               r="48"
               fill="none"
               stroke="green"
-              strokeWidth={4}
-              strokeDasharray="100 2"
-              strokeDashoffset={-2}
+              strokeWidth={3}
+              strokeDasharray={
+                item.stories.length > 1
+                  ? `${(48 * 2 * Math.PI) / item.stories.length - 3} 3`
+                  : null
+              }
             />
-
-            <Image source={{uri: profile}} style={styles.profileImage} />
+            <View style={styles.profileView}>
+              <Image source={{uri: profile}} style={styles.profileImage} />
+            </View>
           </Svg>
 
           <Text style={styles.userNameText}>{username}</Text>
@@ -81,28 +85,28 @@ const styles = StyleSheet.create({
   },
   topSeperatorView: {
     height: 1,
-    marginTop: 10,
     marginHorizontal: 5,
     backgroundColor: Colors.warmGrey,
   },
   listContainerView: {
-    height: 100,
-    padding: 10,
+    padding: 5,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 50,
-    position: 'relative',
+  profileView: {
+    height: 75,
+    width: 75,
+    overflow: 'hidden',
     alignSelf: 'center',
-    marginVertical: 10,
+    marginVertical: 8,
+  },
+  profileImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
   },
   userNameText: {
     fontSize: 20,
-    fontSize: 20,
-    marginTop: 30,
     marginLeft: 20,
     color: Colors.white,
   },
