@@ -1,20 +1,26 @@
 import {
   ActivityIndicator,
   Dimensions,
+  Pressable,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
+  Animated,
 } from 'react-native';
 import React, {useCallback, useRef, useState} from 'react';
 import GestureRecognizer from 'react-native-swipe-gestures';
-import {Animated, TouchableOpacity} from 'react-native';
 
 import Video from 'react-native-video';
 import Colors from '../../utils/Colors';
+import ProgressBar from '../../storyView/progressBar/ProgressBar';
+import StoryHeader from '../header/StoryHeader';
 
 const {height, width} = Dimensions.get('window');
 
 const RenderStoryItem = props => {
+  console.log('propssssss off ', props?.profile);
+  let currentAnim = 0;
   const [loader, setLoader] = useState(true);
   const [isPause, setPause] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,6 +70,31 @@ const RenderStoryItem = props => {
     }, 300);
   }, [loader]);
 
+  const getAnimatedValue = useCallback(
+    anim => {
+      if (!isPause) {
+        currentAnim = anim;
+      }
+    },
+    [isPause],
+  );
+
+  const _pauseCallBack = useCallback(
+    pause => {
+      setPause(pause);
+    },
+    [isPause],
+  );
+
+  // console.log(currentAnim);
+
+  const _setCurrentIndex = useCallback(
+    param => {
+      setCurrentIndex(param);
+    },
+    [currentIndex],
+  );
+
   const changeStory = useCallback(
     event => {
       if (event.locationX > width / 2) {
@@ -94,6 +125,12 @@ const RenderStoryItem = props => {
     }
   }, [currentIndex]);
 
+  const pauseStory = useCallback(() => {
+    setPause(true);
+  }, [isPause]);
+
+  console.log(isPause);
+
   const thumbnailLoader = useCallback(() => {
     return (
       <Animated.Image
@@ -113,9 +150,9 @@ const RenderStoryItem = props => {
   const contentLoaded = useCallback(() => {
     return (
       <>
+        {console.log('ispaused to hiofjoivfjiov', isPause)}
         {props.storyUrl[currentIndex]?.type === 'video' ? (
           <AnimatedVideo
-            repeat
             onLoad={_onLoad}
             onLoadStart={startAnimation}
             paused={isPause}
@@ -144,7 +181,7 @@ const RenderStoryItem = props => {
         )}
       </>
     );
-  }, [currentIndex]);
+  }, [currentIndex, isPause]);
 
   return (
     <GestureRecognizer
@@ -158,20 +195,44 @@ const RenderStoryItem = props => {
       onSwipeDown={onSwipeDown}>
       <TouchableOpacity
         delayLongPress={500}
-        // onLongPress={pauseStory}
-        // onPressOut={() => {
-        //   setPause(false);
-        // }}
+        onLongPress={pauseStory}
+        onPressOut={() => {
+          console.log('inside', isPause);
+          setPause(false);
+        }}
         onPress={event => {
           changeStory(event?.nativeEvent);
         }}
-        // activeOpacity={0.5}
+        activeOpacity={1}
         style={styles.parentContainer}>
         {loader ? thumbnailLoader() : contentLoaded()}
       </TouchableOpacity>
-      {isLoading && (
+      {isLoading ? (
         <ActivityIndicator color={Colors.red} style={styles.indicatorStyle} />
-      )}
+      ) : null}
+      <ProgressBar
+        startAnim={startAnim}
+        loader={loader}
+        open={props?.open}
+        handleOpen={props?.handleOpen}
+        stories={props.storyUrl}
+        index={props.index}
+        profile={props.profile}
+        userName={props.userName}
+        isPause={isPause}
+        setPause={_pauseCallBack}
+        getAnimatedValue={getAnimatedValue}
+        currentAnim={currentAnim}
+        currentIndex={currentIndex}
+        setCurrentIndex={_setCurrentIndex}
+      />
+      <StoryHeader
+        open={props?.open}
+        profile={props?.profile}
+        userName={props?.userName}
+        handleOpen={props?.handleOpen}
+        createdAt={props?.storyUrl[currentIndex]?.created}
+      />
     </GestureRecognizer>
 
     // <GestureRecognizer
@@ -186,21 +247,7 @@ const RenderStoryItem = props => {
     //     // onPress={event => changeStory(event.nativeEvent)}
     //     activeOpacity={1}
     //     style={styles.parentContainer}>
-    //     {/* <ProgressBar
-    //     //   startAnim={startAnim}
-    //     //   loader={loader}
-    //     //   open={props?.open}
-    //     //   handleOpen={props?.handleOpen}
-    //     //   stories={props.story}
-    //     //   profile={props.profile}
-    //     //   userName={props.userName}
-    //     //   isPause={isPause}
-    //     //   setPause={_pauseCallBack}
-    //     //   getAnimatedValue={getAnimatedValue}
-    //     //   currentAnim={currentAnim}
-    //     //   currentIndex={currentIndex}
-    //     //   setCurrentIndex={_setCurrentIndex}
-    //     /> */}
+
     //     {props?.loader ? props?.thumbnailLoader() : props?.contentLoaded()}
     //   </TouchableOpacity>
     // </GestureRecognizer>

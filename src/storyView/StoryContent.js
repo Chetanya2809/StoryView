@@ -22,10 +22,10 @@ let currentAnim = 0;
 
 const StoryContent = props => {
   const flatListref = useRef();
-
-  const [isPause, setPause] = useState(false);
+  console.log('fdhxgjchvjkl,;.', props?.data[props?.open?.index]?.username);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  console.log('props', props?.data[props?.open?.index]);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
   const animateRound = useRef(new Animated.Value(0)).current;
@@ -37,25 +37,13 @@ const StoryContent = props => {
     [currentIndex],
   );
 
-  const _pauseCallBack = useCallback(
-    pause => {
-      setPause(pause);
-    },
-    [isPause],
-  );
+  // const _pauseCallBack = useCallback(
+  //   pause => {
+  //     setPause(pause);
+  //   },
+  //   [isPause],
+  // );
 
-  const changeStory = useCallback(
-    (event, item, i) => {
-      if (i === props.open.index) {
-        if (event.locationX > width / 2) {
-          newStory(item);
-        } else {
-          previousStory(item);
-        }
-      }
-    },
-    [currentIndex],
-  );
   const scrolltoPage = () => {
     flatListref.current.scrollToOffset({
       animated: false,
@@ -107,10 +95,6 @@ const StoryContent = props => {
     }
   }, [currentIndex]);
 
-  const pauseStory = useCallback(() => {
-    setPause(true);
-  }, []);
-
   // const thumbnailLoader = item => {
   //   return (
   //     <Animated.Image
@@ -142,15 +126,9 @@ const StoryContent = props => {
   //   }).start();
   // };
 
-  const getAnimatedValue = useCallback(
-    anim => {
-      if (!isPause) {
-        currentAnim = anim;
-      }
-    },
-    [isPause],
-  );
-
+  const getAnimatedValue = anim => {
+    currentAnim = anim;
+  };
   // const contentLoaded = (item, index) => {
 
   //   return (
@@ -214,6 +192,7 @@ const StoryContent = props => {
   // };
 
   const _onRender = ({item, index}) => {
+    console.log('ITem is ', item);
     const inputRange = [
       (index - 1) * width,
       index * width,
@@ -271,7 +250,10 @@ const StoryContent = props => {
         <RenderStoryItem
           open={props?.open}
           handleOpen={props?.handleOpen}
-          storyUrl={item.stories}
+          storyUrl={item?.stories}
+          index={index}
+          profile={item?.profile}
+          userName={item?.username}
         />
       </Animated.View>
     );
@@ -307,11 +289,27 @@ const StoryContent = props => {
     //   </TouchableOpacity>
     // </GestureRecognizer>
     <>
+      {/* <ProgressBar
+        startAnim={startAnim}
+        // loader={loader}
+        // open={props?.open}
+        // handleOpen={props?.handleOpen}
+        stories={props?.data[props?.open?.index].stories}
+        index={props?.open?.index}
+        // profile={props.profile}
+        // userName={props.userName}
+        // isPause={isPause}
+        // setPause={_pauseCallBack}
+        getAnimatedValue={getAnimatedValue}
+        // currentAnim={currentAnim}
+        currentIndex={currentIndex}
+        setCurrentIndex={_setCurrentIndex}
+      /> */}
       <Animated.FlatList
         contentContainerStyle={{backgroundColor: 'black'}}
         bounces={false}
         ref={flatListref}
-        // pagingEnabled={true}
+        pagingEnabled={true}
         horizontal={true}
         data={props?.data}
         decelerationRate={0}
