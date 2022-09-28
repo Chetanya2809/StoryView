@@ -24,6 +24,7 @@ const StoryContent = props => {
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
 
+  console.log('props', props.story[currentIndex].seen);
   const _setCurrentIndex = useCallback(
     param => {
       setCurrentIndex(param);

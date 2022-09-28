@@ -12,8 +12,6 @@ import Colors from '../../utils/Colors';
 const {height, width} = Dimensions.get('window');
 const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
   const convertDate = date => {
-    console.log('date', date);
-
     let startDate = new Date(date);
     let endDate = new Date();
     let seconds = (endDate.getTime() - startDate.getTime()) / 1000;
@@ -23,7 +21,7 @@ const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
     let current;
     if (days >= 1) {
       current = days == 1 ? 'day' : 'yesterday';
-      return  current;
+      return current;
     } else if (hours > 1) {
       current = days == 1 ? 'hour' : 'hours';
       return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
