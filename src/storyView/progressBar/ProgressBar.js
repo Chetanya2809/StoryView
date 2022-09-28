@@ -12,7 +12,6 @@ const ProgressBar = ({
   loader,
   isPause,
   profile,
-  open,
   index,
   userName,
   startAnim,
@@ -116,7 +115,6 @@ const ProgressBar = ({
         userName={userName}
         createdAt={stories[currentIndex]?.created}
       />
-
     </>
   );
 };
