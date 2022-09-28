@@ -13,7 +13,6 @@ import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 
 const StatusList = () => {
-  console.log("yiuthrgtbhynm,ipo'poi,mujnyh", vidArr);
   const [open, setOpen] = useState({open: false});
 
   const handleOpen = useCallback(
@@ -23,12 +22,11 @@ const StatusList = () => {
     [open],
   );
 
-  const onRender = ({item}) => {
+  const onRender = ({item, index}) => {
     const {username, profile} = item;
     const onPressCard = () => {
       setTimeout(() => {
-        console.log('item', item);
-        setOpen({open: true, item});
+        setOpen({open: true, item, index});
       }, 10);
     };
 
@@ -48,7 +46,7 @@ const StatusList = () => {
     <SafeAreaView style={styles.parentContainer}>
       <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
-      <StoryContainer open={open} handleOpen={handleOpen} />
+      <StoryContainer data={vidArr} open={open} handleOpen={handleOpen} />
       <FlatList data={vidArr} renderItem={onRender} />
     </SafeAreaView>
   );
