@@ -1,3 +1,9 @@
+
+import Video from 'react-native-video';
+import GestureRecognizer from 'react-native-swipe-gestures';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import ProgressBar from './progressBar/ProgressBar';
+
 import {
   View,
   Animated,
@@ -5,24 +11,30 @@ import {
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
+  FlatList,
 } from 'react-native';
 import Colors from '../utils/Colors';
+
+import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
+// import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
+
 import Video from 'react-native-video';
 import ProgressBar from './progressBar/ProgressBar';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 
+
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
 
-const AnimatedVideo = Animated.createAnimatedComponent(Video);
-
 const StoryContent = props => {
-  const [loader, setLoader] = useState(true);
-  const [isPause, setPause] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const flatListref = useRef();
+  console.log('fdhxgjchvjkl,;.', props?.data[props?.open?.index]?.username);
+
   const [currentIndex, setCurrentIndex] = useState(0);
+  console.log('props', props?.data[props?.open?.index]);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
+  const animateRound = useRef(new Animated.Value(0)).current;
 
   console.log('props', props.story[currentIndex].seen);
   const _setCurrentIndex = useCallback(
@@ -32,30 +44,30 @@ const StoryContent = props => {
     [currentIndex],
   );
 
-  const _pauseCallBack = useCallback(
-    pause => {
-      setPause(pause);
-    },
-    [isPause],
-  );
+  // const _pauseCallBack = useCallback(
+  //   pause => {
+  //     setPause(pause);
+  //   },
+  //   [isPause],
+  // );
 
-  const changeStory = useCallback(
-    event => {
-      if (event.locationX > width / 2) {
-        newStory();
-      } else {
-        previousStory();
-      }
-    },
-    [currentIndex],
-  );
+  const scrolltoPage = () => {
+    flatListref.current.scrollToOffset({
+      animated: false,
+      offset: width * props?.open?.index,
+    });
+  };
 
   useEffect(() => {
-    return () => {
-      fadeAnimation.stopAnimation();
-      fadeAnimation.removeListener();
-    };
+    setTimeout(() => {
+      scrolltoPage();
+    }, 200);
+    // return () => {
+    //   fadeAnimation.stopAnimation();
+    //   fadeAnimation.removeListener();
+    // };
   }, []);
+
   const startAnim = animationStart => {
     Animated.timing(fadeAnimation, {
       toValue: 0,
@@ -67,15 +79,18 @@ const StoryContent = props => {
     if (animationStart) animationStart(0);
   };
 
-  const newStory = useCallback(() => {
-    currentAnim = 0;
+  const newStory = useCallback(
+    item => {
+      currentAnim = 0;
 
-    if (props.story.length - 1 > currentIndex) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
-  }, [currentIndex]);
+      if (item.stories.length - 1 > currentIndex) {
+        setCurrentIndex(currentIndex + 1);
+      } else {
+        setCurrentIndex(0);
+      }
+    },
+    [currentIndex],
+  );
 
   const previousStory = useCallback(() => {
     currentAnim = 0;
@@ -86,6 +101,31 @@ const StoryContent = props => {
       setCurrentIndex(0);
     }
   }, [currentIndex]);
+
+
+  // const thumbnailLoader = item => {
+  //   return (
+  //     <Animated.Image
+  //       resizeMode="contain"
+  //       source={{uri: item.stories[currentIndex]?.thumbnailUrl}}
+  //       style={[
+  //         styles.imageDefaultStyle,
+  //         {
+  //           opacity: fadeAnimation,
+  //         },
+  //       ]}
+  //       onLoadEnd={() => {
+  //         setTimeout(() => {
+  //           setLoader(false);
+  //           startAnim();
+  //         }, 300);
+  //       }}
+  //     />
+  //   );
+  // };
+
+  // const startAnimation = () => {
+  //   setIsLoading(true);
 
   const pauseStory = useCallback(() => {
     setPause(true);
@@ -121,110 +161,190 @@ const StoryContent = props => {
     }).start();
   };
 
-  const getAnimatedValue = useCallback(
-    anim => {
-      if (!isPause) {
-        currentAnim = anim;
-      }
-    },
-    [isPause],
-  );
 
-  const contentLoaded = () => {
-    return (
-      <>
-        {props.story[currentIndex]?.type === 'video' ? (
-          <View>
-            <AnimatedVideo
-              onLoadStart={startAnimation}
-              paused={isPause}
-              resizeMode={'contain'}
-              onLoad={() => {
-                setTimeout(() => {
-                  setIsLoading(false);
-                }, 300);
-              }}
-              style={[
-                styles.videoStyle,
-                {
-                  opacity: opacityAnimation,
-                },
-              ]}
-              source={{uri: props?.story[currentIndex]?.url}}
-            />
-            {isLoading ? (
-              <ActivityIndicator
-                color={Colors.red}
-                style={styles.indicatorStyle}
-              />
-            ) : null}
-          </View>
-        ) : (
-          <Animated.Image
-            onLoadStart={startAnimation}
-            resizeMode="contain"
-            source={{uri: props?.story[currentIndex]?.url}}
-            style={[
-              styles.imageDefaultStyle,
-              {
-                opacity: opacityAnimation,
-              },
-            ]}
-          />
-        )}
-      </>
-    );
+  //   Animated.timing(opacityAnimation, {
+  //     toValue: 1,
+  //     duration: 1000,
+  //     useNativeDriver: true,
+  //   }).start();
+  // };
+
+  const getAnimatedValue = anim => {
+    currentAnim = anim;
   };
+  // const contentLoaded = (item, index) => {
 
-  // const getAnimatedValue = useCallback(
-  //   anim => {
-  //     if (!isPause) {
-  //       currentAnim = anim;
-  //     }
-  //   },
-  //   [isPause],
-  // );
-
-  // const _renderItem = ({item}) => {
   //   return (
-  //     <TouchableOpacity
-  //       delayLongPress={500}
-  //       onLongPress={pauseStory}
-  //       onPressOut={() => {
-  //         setPause(false);
-  //       }}
-  //       onPress={event => changeStory(event.nativeEvent)}
-  //       activeOpacity={1}
-  //       style={styles.parentContainer}>
-  //       <ProgressBar
-  //         startAnim={startAnim}
-  //         loader={loader}
-  //         stories={props.story}
-  //         isPause={isPause}
-  //         setPause={_pauseCallBack}
-  //         getAnimatedValue={getAnimatedValue}
-  //         currentAnim={currentAnim}
-  //         currentIndex={currentIndex}
-  //         setCurrentIndex={_setCurrentIndex}
-  //       />
+  //     <>
+  //       {item.stories[currentIndex]?.type === 'video' ? (
+  //         <View>
 
-  //       {loader ? thumbnailLoader() : contentLoaded()}
-  //     </TouchableOpacity>
+  //           <AnimatedVideo
+  //             onLoadStart={startAnimation}
+  //             paused={isPause}
+  //             // resizeMode={'contain'}
+  //             onLoad={() => {
+  //               setTimeout(() => {
+  //                 setIsLoading(false);
+  //               }, 300);
+  //             }}
+  //             style={[
+  //               styles.videoStyle,
+  //               {
+  //                 opacity: opacityAnimation,
+  //               },
+  //             ]}
+  //             source={{uri: item.stories[currentIndex]?.url}}
+  //           />
+  //           {isLoading ? (
+  //             <ActivityIndicator
+  //               color={Colors.red}
+  //               style={styles.indicatorStyle}
+  //             />
+  //           ) : null}
+  //         </View>
+  //       ) : (
+  //         // <Animated.Image
+  //         //   onLoadStart={startAnimation}
+  //         //   resizeMode="contain"
+  //         //   source={{uri: props?.story[currentIndex]?.url}}
+  //         //   style={[
+  //         //     styles.imageDefaultStyle,
+  //         //     {
+  //         //       opacity: opacityAnimation,
+  //         //     },
+  //         //   ]}
+  //         // />
+  //         <View>
+
+  //           <Animated.Image
+  //             onLoadStart={startAnimation}
+  //             resizeMode="contain"
+  //             source={{uri: item.stories[currentIndex]?.url}}
+  //             style={[
+  //               styles.imageDefaultStyle,
+  //               {
+  //                 opacity: opacityAnimation,
+  //               },
+  //             ]}
+  //           />
+  //         </View>
+  //       )}
+  //     </>
   //   );
   // };
 
+  const _onRender = ({item, index}) => {
+    console.log('ITem is ', item);
+    const inputRange = [
+      (index - 1) * width,
+      index * width,
+      (index + 1) * width,
+    ];
+
+    const rotate = animateRound.interpolate({
+      inputRange,
+      outputRange: ['30 deg', '0 deg', '-30 deg'],
+    });
+    const rightGap = animateRound.interpolate({
+      inputRange,
+      outputRange: [200, 0, -200],
+    });
+    return (
+      // <RenderStoryItem
+      //   item={item.stories}
+      //   loader={loader}
+      //   contentLoaded={contentLoaded}
+      //   getAnimatedValue={getAnimatedValue}
+      //   thumbnailLoader={thumbnailLoader}
+      //   onSwipeDown={onSwipeDown}
+      // />
+      // <GestureRecognizer
+      //   style={styles.parentContainer}
+      //   onSwipeDown={onSwipeDown}>
+      //   <TouchableOpacity
+      //     delayLongPress={500}
+      //     onLongPress={pauseStory}
+      //     onPressOut={() => {
+      //       setPause(false);
+      //     }}
+      //     onPress={event => changeStory(event.nativeEvent)}
+      //     activeOpacity={1}
+      //     style={styles.parentContainer}>
+      //     <ProgressBar
+      //       startAnim={startAnim}
+      //       loader={loader}
+      //       open={props?.open}
+      //       handleOpen={props?.handleOpen}
+      //       stories={props.story}
+      //       profile={props.profile}
+      //       userName={props.userName}
+      //       isPause={isPause}
+      //       setPause={_pauseCallBack}
+      //       getAnimatedValue={getAnimatedValue}
+      //       currentAnim={currentAnim}
+      //       currentIndex={currentIndex}
+      //       setCurrentIndex={_setCurrentIndex}
+      //     />
+      //     {loader ? thumbnailLoader() : contentLoaded()}
+      //   </TouchableOpacity>
+      // </GestureRecognizer>
+      <Animated.View style={[{transform: [{rotate}, {translateX: rightGap}]}]}>
+        <RenderStoryItem
+          open={props?.open}
+          handleOpen={props?.handleOpen}
+          storyUrl={item?.stories}
+          index={index}
+          profile={item?.profile}
+          userName={item?.username}
+        />
+      </Animated.View>
+    );
+  };
+
   return (
-    <TouchableOpacity
-      delayLongPress={500}
-      onLongPress={pauseStory}
-      onPressOut={() => {
-        setPause(false);
-      }}
-      onPress={event => changeStory(event.nativeEvent)}
-      activeOpacity={1}
-      style={styles.parentContainer}>
-      <ProgressBar
+    // <GestureRecognizer style={styles.parentContainer} onSwipeDown={onSwipeDown}>
+    //   <TouchableOpacity
+    //     delayLongPress={500}
+    //     onLongPress={pauseStory}
+    //     onPressOut={() => {
+    //       setPause(false);
+    //     }}
+    //     onPress={event => changeStory(event.nativeEvent)}
+    //     activeOpacity={1}
+    //     style={styles.parentContainer}>
+    //     <ProgressBar
+    //       startAnim={startAnim}
+    //       loader={loader}
+    //       open={props?.open}
+    //       handleOpen={props?.handleOpen}
+    //       stories={props.story}
+    //       profile={props.profile}
+    //       userName={props.userName}
+    //       isPause={isPause}
+    //       setPause={_pauseCallBack}
+    //       getAnimatedValue={getAnimatedValue}
+    //       currentAnim={currentAnim}
+    //       currentIndex={currentIndex}
+    //       setCurrentIndex={_setCurrentIndex}
+    //     />
+    //     {loader ? thumbnailLoader() : contentLoaded()}
+    //   </TouchableOpacity>
+    // </GestureRecognizer>
+    <>
+      {/* <ProgressBar
         startAnim={startAnim}
+
+        // loader={loader}
+        // open={props?.open}
+        // handleOpen={props?.handleOpen}
+        stories={props?.data[props?.open?.index].stories}
+        index={props?.open?.index}
+        // profile={props.profile}
+        // userName={props.userName}
+        // isPause={isPause}
+        // setPause={_pauseCallBack}
+
         loader={loader}
         stories={props.story}
         profile={props.profile}
@@ -233,25 +353,31 @@ const StoryContent = props => {
         open={props.open}
         setPause={_pauseCallBack}
         handleOpen={props?.handleOpen}
+
         getAnimatedValue={getAnimatedValue}
-        currentAnim={currentAnim}
+        // currentAnim={currentAnim}
         currentIndex={currentIndex}
         setCurrentIndex={_setCurrentIndex}
+      /> */}
+      <Animated.FlatList
+        contentContainerStyle={{backgroundColor: 'black'}}
+        bounces={false}
+        ref={flatListref}
+        pagingEnabled={true}
+        horizontal={true}
+        data={props?.data}
+        decelerationRate={0}
+        renderItem={_onRender}
+        snapToInterval={width}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: animateRound}}}],
+          {
+            useNativeDriver: true,
+          },
+        )}
+        keyExtractor={item => item.stories[currentIndex]?.url}
       />
-      {loader ? thumbnailLoader() : contentLoaded()}
-    </TouchableOpacity>
-
-    // <View style={{height: height}}>
-    //   <FlatList
-    //     bounces={false}
-    //     data={vidArr}
-    //     renderItem={_renderItem}
-    //     pagingEnabled={true}
-    //     // snapToInterval={width}
-    //     // decelerationRate={0}
-    //     horizontal={true}
-    //   />
-    // </View>
+    </>
   );
 };
 
@@ -260,16 +386,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
   },
-  parentContainer: {flex: 1},
-  indicatorStyle: {
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    alignItems: 'center',
-    position: 'absolute',
-    justifyContent: 'center',
-  },
+  parentContainer: {height: height, width: width, backgroundColor: 'black'},
+  // indicatorStyle: {
+  //   top: 0,
+  //   left: 0,
+  //   right: 0,
+  //   bottom: 0,
+  //   alignItems: 'center',
+  //   position: 'absolute',
+  //   justifyContent: 'center',
+  // },
   imageDefaultStyle: {height: '100%', width: '100%'},
 });
 

@@ -10,12 +10,20 @@ import React from 'react';
 import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
+
+const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
+
 const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
+
   const convertDate = date => {
     let startDate = new Date(date);
+
     let endDate = new Date();
+
     let seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+
     let minutes = seconds / 60;
+
     let hours = minutes / 60;
     let days = hours / 24;
     let current;
@@ -27,8 +35,11 @@ const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
       return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
     } else {
       current = minutes == 1 ? 'minute' : 'minutes';
-      return Math.trunc(hours) + ' ' + current + ' ' + 'ago';
+      return Math.trunc(minutes) + ' ' + current + ' ' + 'ago';
     }
+  };
+  const handleBackPress = () => {
+    handleOpen({...open, open: false});
   };
 
   const onBackPress = () => {
@@ -40,7 +51,11 @@ const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
       <TouchableOpacity
         style={styles.leftIconView}
         activeOpacity={0.8}
+
+        onPress={handleBackPress}>
+
         onPress={onBackPress}>
+
         <Image
           source={require('../../assets/images/arrow.png')}
           style={styles.leftIcon}

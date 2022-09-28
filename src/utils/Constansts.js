@@ -11,8 +11,12 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1532579853048-ec5f8f15f88d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 10000,
+
+        created: '2022-09-27T07:00:00',
+
         seen: false,
         created: '2022-09-25T10:24:00',
+
       },
     ],
   },
@@ -28,8 +32,12 @@ const vidArr = [
         url: 'https://www.w3schools.com/html/mov_bbb.mp4',
         type: 'video',
         duration: 10000,
+
+        created: '2022-09-27T10:24:00',
+
         seen: false,
         created: '2022-09-26T23:24:00',
+
       },
       {
         id: 1,
@@ -148,8 +156,12 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1512101176959-c557f3516787?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 10000,
+
+        created: '2022-09-27T10:24:00',
+
         seen: false,
         created: '2022-09-26T10:24:00',
+
       },
       {
         id: 1,

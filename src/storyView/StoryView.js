@@ -1,10 +1,17 @@
 import React from 'react';
 import StoryContent from './StoryContent';
 
+
+const StoryView = ({storyData, handleOpen, open, data}) => {
+  return (
+    <StoryContent
+      data={data}
+
 const StoryView = ({storyData, index, handleOpen, open}) => {
   return (
     <StoryContent
       index={index}
+
       open={open}
       handleOpen={handleOpen}
       story={storyData?.stories}

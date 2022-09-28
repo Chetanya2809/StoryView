@@ -12,6 +12,8 @@ const ProgressBar = ({
   loader,
   isPause,
   profile,
+  open,
+  index,
   userName,
   startAnim,
   handleOpen,
@@ -20,6 +22,7 @@ const ProgressBar = ({
   setCurrentIndex,
   getAnimatedValue,
 }) => {
+  console.log('stories', index);
   useEffect(() => {
     if (isPause) {
       anim.stopAnimation();
@@ -105,6 +108,7 @@ const ProgressBar = ({
           );
         })}
       </View>
+
       <StoryHeader
         handleOpen={handleOpen}
         profile={profile}
@@ -112,6 +116,7 @@ const ProgressBar = ({
         userName={userName}
         createdAt={stories[currentIndex]?.created}
       />
+
     </>
   );
 };
