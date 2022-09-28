@@ -10,7 +10,11 @@ import React from 'react';
 import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
+
 const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
+
+const StoryHeader = ({profile, userName, createdAt, handleOpen, open}) => {
+
   const convertDate = date => {
     let startDate = new Date(date);
 
@@ -38,12 +42,20 @@ const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
     handleOpen({...open, open: false});
   };
 
+  const onBackPress = () => {
+    handleOpen({...open, open: false});
+  };
+
   return (
     <View style={styles.parentView}>
       <TouchableOpacity
         style={styles.leftIconView}
         activeOpacity={0.8}
+
         onPress={handleBackPress}>
+
+        onPress={onBackPress}>
+
         <Image
           source={require('../../assets/images/arrow.png')}
           style={styles.leftIcon}
@@ -86,7 +98,7 @@ const styles = StyleSheet.create({
   },
   profileStyle: {height: '100%', width: '100%'},
   usernameStyle: {color: Colors.white, fontSize: 17, fontWeight: 'bold'},
-  storyTimeStyle: {fontSize: 10, color: Colors.white, marginTop: 3},
+  storyTimeStyle: {fontSize: 15, color: Colors.white, marginTop: 3},
   userDetailsView: {paddingLeft: 10},
 });
 

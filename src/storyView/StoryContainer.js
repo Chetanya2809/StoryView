@@ -9,6 +9,7 @@ const {height, width} = Dimensions.get('window');
 
 const StoryContainer = ({open, handleOpen, data}) => {
   return (
+
     <>
       {open && (
         <Modal
@@ -33,6 +34,21 @@ const StoryContainer = ({open, handleOpen, data}) => {
     //   onSwipeComplete={onCompleteSwipe}
     //   style={styles.modalStyle}>
     // </Modal>
+
+    <Modal
+      isVisible={open.open}
+      coverScreen={true}
+      swipeDirection="down"
+      onSwipeComplete={onCompleteSwipe}
+      style={styles.modalStyle}>
+      <StoryView
+        open={open}
+        handleOpen={handleOpen}
+        storyData={open.item}
+        index={open.index}
+      />
+    </Modal>
+
   );
 };
 

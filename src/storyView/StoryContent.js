@@ -1,21 +1,27 @@
+
 import Video from 'react-native-video';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import ProgressBar from './progressBar/ProgressBar';
+
 import {
-  Image,
-  Text,
-  StyleSheet,
   View,
   Animated,
+  StyleSheet,
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
   FlatList,
 } from 'react-native';
 import Colors from '../utils/Colors';
+
 import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
 // import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
+
+import Video from 'react-native-video';
+import ProgressBar from './progressBar/ProgressBar';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+
 
 const {height, width} = Dimensions.get('window');
 let currentAnim = 0;
@@ -30,6 +36,7 @@ const StoryContent = props => {
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
   const animateRound = useRef(new Animated.Value(0)).current;
 
+  console.log('props', props.story[currentIndex].seen);
   const _setCurrentIndex = useCallback(
     param => {
       setCurrentIndex(param);
@@ -88,12 +95,13 @@ const StoryContent = props => {
   const previousStory = useCallback(() => {
     currentAnim = 0;
 
-    if (currentIndex > 0 && props.story.length) {
+    if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
     } else {
       setCurrentIndex(0);
     }
   }, [currentIndex]);
+
 
   // const thumbnailLoader = item => {
   //   return (
@@ -118,6 +126,41 @@ const StoryContent = props => {
 
   // const startAnimation = () => {
   //   setIsLoading(true);
+
+  const pauseStory = useCallback(() => {
+    setPause(true);
+  }, []);
+
+  const thumbnailLoader = () => {
+    return (
+      <Animated.Image
+        resizeMode="contain"
+        source={{uri: props?.story[currentIndex]?.thumbnailUrl}}
+        style={[
+          styles.imageDefaultStyle,
+          {
+            opacity: fadeAnimation,
+          },
+        ]}
+        onLoadEnd={() => {
+          setTimeout(() => {
+            setLoader(false);
+            startAnim();
+          }, 300);
+        }}
+      />
+    );
+  };
+
+  const startAnimation = () => {
+    setIsLoading(true);
+    Animated.timing(opacityAnimation, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start();
+  };
+
 
   //   Animated.timing(opacityAnimation, {
   //     toValue: 1,
@@ -291,6 +334,7 @@ const StoryContent = props => {
     <>
       {/* <ProgressBar
         startAnim={startAnim}
+
         // loader={loader}
         // open={props?.open}
         // handleOpen={props?.handleOpen}
@@ -300,6 +344,16 @@ const StoryContent = props => {
         // userName={props.userName}
         // isPause={isPause}
         // setPause={_pauseCallBack}
+
+        loader={loader}
+        stories={props.story}
+        profile={props.profile}
+        userName={props.userName}
+        isPause={isPause}
+        open={props.open}
+        setPause={_pauseCallBack}
+        handleOpen={props?.handleOpen}
+
         getAnimatedValue={getAnimatedValue}
         // currentAnim={currentAnim}
         currentIndex={currentIndex}

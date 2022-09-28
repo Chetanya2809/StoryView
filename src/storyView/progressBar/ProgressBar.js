@@ -7,6 +7,7 @@ const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
 const ProgressBar = ({
+  open,
   stories,
   loader,
   isPause,
@@ -107,6 +108,15 @@ const ProgressBar = ({
           );
         })}
       </View>
+
+      <StoryHeader
+        handleOpen={handleOpen}
+        profile={profile}
+        open={open}
+        userName={userName}
+        createdAt={stories[currentIndex]?.created}
+      />
+
     </>
   );
 };
