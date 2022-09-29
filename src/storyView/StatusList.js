@@ -39,7 +39,7 @@ const StatusList = () => {
           activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
-          <Svg width="90" height="90" viewBox="0 0 100 100">
+          <Svg width="70" height="70" viewBox="0 0 100 100">
             <Circle
               cx="50"
               cy="50"
@@ -57,7 +57,6 @@ const StatusList = () => {
               <Image source={{uri: profile}} style={styles.profileImage} />
             </View>
           </Svg>
-
           <Text style={styles.userNameText}>{username}</Text>
         </TouchableOpacity>
         <View style={styles.topSeperatorView} />
@@ -69,7 +68,6 @@ const StatusList = () => {
     <SafeAreaView style={styles.parentContainer}>
       <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
-
       <StoryContainer data={vidArr} open={open} handleOpen={handleOpen} />
       <FlatList data={vidArr} renderItem={onRender} />
     </SafeAreaView>
@@ -84,6 +82,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 25,
     marginTop: 10,
+    marginBottom: 20,
     alignSelf: 'center',
     color: Colors.white,
   },
@@ -93,16 +92,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.warmGrey,
   },
   listContainerView: {
-    padding: 5,
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
   profileView: {
-    height: 75,
-    width: 75,
+    width: 55,
+    height: 55,
+    marginVertical: 8,
     overflow: 'hidden',
     alignSelf: 'center',
-    marginVertical: 8,
   },
   profileImage: {
     width: '100%',
