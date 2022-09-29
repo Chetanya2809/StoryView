@@ -38,7 +38,7 @@ const vidArr = [
         created: '2022-09-26T23:24:00',
       },
       {
-        id: 1,
+        id: 0,
         thumbnailUrl:
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
@@ -47,6 +47,19 @@ const vidArr = [
         seen: false,
         created: '2022-09-26T23:24:00',
       },
+      // {
+      //   id: 1,
+      //   thumbnailUrl:
+      //     'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
+      //   url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+      //   type: 'video',
+      //   duration: 10000,
+
+      //   created: '2022-09-27T10:24:00',
+
+      //   seen: false,
+      //   created: '2022-09-26T23:24:00',
+      // },
 
       {
         id: 2,
@@ -133,6 +146,16 @@ const vidArr = [
         thumbnailUrl:
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1478397453044-17bb5f994100?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+        type: 'image',
+        duration: 10000,
+        seen: false,
+        created: '2022-09-26T10:24:00',
+      },
+      {
+        id: 2,
+        thumbnailUrl:
+          'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
+        url: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=581&q=80',
         type: 'image',
         duration: 10000,
         seen: false,

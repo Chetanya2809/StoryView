@@ -8,60 +8,61 @@ import {
   TouchableOpacity,
   Animated,
 } from 'react-native';
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 import Video from 'react-native-video';
 import Colors from '../../utils/Colors';
 import ProgressBar from '../../storyView/progressBar/ProgressBar';
 import StoryHeader from '../header/StoryHeader';
+import {useIsFocused} from '@react-navigation/native';
 
 const {height, width} = Dimensions.get('window');
 
 const RenderStoryItem = props => {
-  console.log('propssssss off ', props?.profile);
   let currentAnim = 0;
+  const isFocused = useIsFocused();
   const [loader, setLoader] = useState(true);
   const [isPause, setPause] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const AnimatedVideo = Animated.createAnimatedComponent(Video);
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
   const fadeAnimation = useRef(new Animated.Value(1)).current;
 
+  useEffect(() => {
+    return setPause(true);
+  }, []);
   const onSwipeDown = useCallback(() => {
     props?.handleOpen({...props.open, open: false});
   }, [props?.open]);
 
   const startAnimation = useCallback(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     Animated.timing(opacityAnimation, {
       toValue: 1,
-      duration: 1000,
+      duration: props.storyUrl[currentIndex].duration,
       useNativeDriver: true,
     }).start();
-  }, [isLoading]);
+  }, []);
 
-  const startAnim = useCallback(
-    animationStart => {
-      setIsLoading(true);
-      Animated.timing(fadeAnimation, {
-        toValue: 0,
-        duration: 300,
-        delay: 200,
-        useNativeDriver: true,
-      }).start();
+  const startAnim = useCallback(animationStart => {
+    // setIsLoading(true);
+    Animated.timing(fadeAnimation, {
+      toValue: 0,
+      duration: 300,
+      delay: 200,
+      useNativeDriver: true,
+    }).start();
 
-      if (animationStart) animationStart(0);
-    },
-    [isLoading],
-  );
+    if (animationStart) animationStart(0);
+  }, []);
 
   const _onLoad = useCallback(() => {
     setTimeout(() => {
-      setIsLoading(false);
+      // setIsLoading(false);
     }, 200);
-  }, [isLoading]);
+  }, []);
 
   const _onLoadEnd = useCallback(() => {
     setTimeout(() => {
@@ -72,7 +73,7 @@ const RenderStoryItem = props => {
 
   const getAnimatedValue = useCallback(
     anim => {
-      if (!isPause) {
+      if (isPause) {
         currentAnim = anim;
       }
     },
@@ -86,14 +87,9 @@ const RenderStoryItem = props => {
     [isPause],
   );
 
-  // console.log(currentAnim);
-
-  const _setCurrentIndex = useCallback(
-    param => {
-      setCurrentIndex(param);
-    },
-    [currentIndex],
-  );
+  const _setCurrentIndex = param => {
+    setCurrentIndex(param);
+  };
 
   const changeStory = useCallback(
     event => {
@@ -129,8 +125,6 @@ const RenderStoryItem = props => {
     setPause(true);
   }, [isPause]);
 
-  console.log(isPause);
-
   const thumbnailLoader = useCallback(() => {
     return (
       <Animated.Image
@@ -150,7 +144,6 @@ const RenderStoryItem = props => {
   const contentLoaded = useCallback(() => {
     return (
       <>
-        {console.log('ispaused to hiofjoivfjiov', isPause)}
         {props.storyUrl[currentIndex]?.type === 'video' ? (
           <AnimatedVideo
             onLoad={_onLoad}
@@ -197,7 +190,6 @@ const RenderStoryItem = props => {
         delayLongPress={500}
         onLongPress={pauseStory}
         onPressOut={() => {
-          console.log('inside', isPause);
           setPause(false);
         }}
         onPress={event => {
@@ -207,9 +199,9 @@ const RenderStoryItem = props => {
         style={styles.parentContainer}>
         {loader ? thumbnailLoader() : contentLoaded()}
       </TouchableOpacity>
-      {isLoading ? (
+      {/* {isLoading ? (
         <ActivityIndicator color={Colors.red} style={styles.indicatorStyle} />
-      ) : null}
+      ) : null} */}
       <ProgressBar
         startAnim={startAnim}
         loader={loader}

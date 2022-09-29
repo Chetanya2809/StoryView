@@ -8,6 +8,7 @@ var anim = new Animated.Value(0);
 
 const ProgressBar = ({
   open,
+
   stories,
   loader,
   isPause,
@@ -21,7 +22,6 @@ const ProgressBar = ({
   setCurrentIndex,
   getAnimatedValue,
 }) => {
-  console.log('stories', index);
   useEffect(() => {
     if (isPause) {
       anim.stopAnimation();
@@ -30,8 +30,8 @@ const ProgressBar = ({
 
   useEffect(() => {
     anim.setValue(0);
-    !loader && startAnim(animationFunction);
-  }, [currentIndex, loader]);
+    startAnim(animationFunction);
+  }, [currentIndex]);
 
   useEffect(() => {
     anim.addListener(({value}) => {
@@ -51,7 +51,7 @@ const ProgressBar = ({
       duration:
         stories[currentIndex].duration -
         stories[currentIndex].duration * currentAnim,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start(({finished}) => {
       {
         currentIndex < stories.length - 1
@@ -86,20 +86,29 @@ const ProgressBar = ({
                 },
               ]}>
               {index === currentIndex ? (
-                <Animated.View
-                  style={[
-                    styles.progressView,
-                    {
-                      width: anim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [
-                          0,
-                          width / stories.length - stories.length + 1,
+                <>
+                  {console.log(stories)}
+                  {console.log(-(width / stories.length - stories.length + 1))}
+                  <Animated.View
+                    style={[
+                      styles.progressView,
+                      {
+                        width: width / stories.length - stories.length + 1,
+                        transform: [
+                          {
+                            translateX: anim.interpolate({
+                              inputRange: [0, 1],
+                              outputRange: [
+                                -(width / stories.length - stories.length + 1),
+                                0,
+                              ],
+                            }),
+                          },
                         ],
-                      }),
-                    },
-                  ]}
-                />
+                      },
+                    ]}
+                  />
+                </>
               ) : (
                 <View style={styles.seenedView} />
               )}
@@ -138,6 +147,7 @@ const styles = StyleSheet.create({
     height: 3,
     borderRadius: 2,
     backgroundColor: Colors.warmGrey,
+    overflow: 'hidden',
   },
   seenedView: {
     height: 3,

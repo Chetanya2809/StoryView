@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import Colors from '../utils/Colors';
 import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
+
 // import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
 
 const {height, width} = Dimensions.get('window');
@@ -22,9 +23,9 @@ let currentAnim = 0;
 
 const StoryContent = props => {
   const flatListref = useRef();
-  console.log('fdhxgjchvjkl,;.', props?.data[props?.open?.index]?.username);
+
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log('props', props?.data[props?.open?.index]);
+
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
   const animateRound = useRef(new Animated.Value(0)).current;
@@ -225,7 +226,6 @@ const StoryContent = props => {
   // };
 
   const _onRender = ({item, index}) => {
-    console.log('ITem is ', item);
     const inputRange = [
       (index - 1) * width,
       index * width,
@@ -260,25 +260,7 @@ const StoryContent = props => {
       //     }}
       //     onPress={event => changeStory(event.nativeEvent)}
       //     activeOpacity={1}
-      //     style={styles.parentContainer}>
-      //     <ProgressBar
-      //       startAnim={startAnim}
-      //       loader={loader}
-      //       open={props?.open}
-      //       handleOpen={props?.handleOpen}
-      //       stories={props.story}
-      //       profile={props.profile}
-      //       userName={props.userName}
-      //       isPause={isPause}
-      //       setPause={_pauseCallBack}
-      //       getAnimatedValue={getAnimatedValue}
-      //       currentAnim={currentAnim}
-      //       currentIndex={currentIndex}
-      //       setCurrentIndex={_setCurrentIndex}
-      //     />
-      //     {loader ? thumbnailLoader() : contentLoaded()}
-      //   </TouchableOpacity>
-      // </GestureRecognizer>
+
       <Animated.View style={[{transform: [{rotate}, {translateX: rightGap}]}]}>
         <RenderStoryItem
           open={props?.open}
@@ -350,6 +332,10 @@ const StoryContent = props => {
         setCurrentIndex={_setCurrentIndex}
       /> */}
       <Animated.FlatList
+        windowSize={1}
+        // initialNumToRender={0}
+        maxToRenderPerBatch={1}
+        updateCellsBatchingPeriod={1}
         contentContainerStyle={{backgroundColor: 'black'}}
         bounces={false}
         ref={flatListref}
@@ -365,6 +351,7 @@ const StoryContent = props => {
             useNativeDriver: true,
           },
         )}
+        // windowSize={1}
         keyExtractor={item => item.stories[currentIndex]?.url}
       />
     </>
