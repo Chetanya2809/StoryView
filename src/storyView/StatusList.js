@@ -1,6 +1,7 @@
 import {
   View,
   Text,
+  Image,
   FlatList,
   StyleSheet,
   SafeAreaView,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import Colors from '../utils/Colors';
 import vidArr from '../utils/Constansts';
+import Svg, {Circle} from 'react-native-svg';
 import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 
@@ -37,6 +39,25 @@ const StatusList = () => {
           activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
+          <Svg width="90" height="90" viewBox="0 0 100 100">
+            <Circle
+              cx="50"
+              cy="50"
+              r="48"
+              fill="none"
+              stroke={Colors.lightGrey}
+              strokeWidth={3}
+              strokeDasharray={
+                item.stories.length > 1
+                  ? `${(48 * 2 * Math.PI) / item.stories.length - 4} 4`
+                  : null
+              }
+            />
+            <View style={styles.profileView}>
+              <Image source={{uri: profile}} style={styles.profileImage} />
+            </View>
+          </Svg>
+
           <Text style={styles.userNameText}>{username}</Text>
         </TouchableOpacity>
         <View style={styles.topSeperatorView} />
