@@ -16,7 +16,6 @@ const vidArr = [
 
         seen: false,
         created: '2022-09-25T10:24:00',
-
       },
     ],
   },
@@ -37,7 +36,6 @@ const vidArr = [
 
         seen: false,
         created: '2022-09-26T23:24:00',
-
       },
       {
         id: 1,
@@ -72,23 +70,7 @@ const vidArr = [
       },
     ],
   },
-  {
-    username: 'Prakhar',
-    profile:
-      'https://avatars2.githubusercontent.com/u/26286830?s=460&u=5d586a3783a6edeb226c557240c0ba47294a4229&v=4',
-    stories: [
-      {
-        id: 1,
-        thumbnailUrl:
-          'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/input/1663331872287.thumb-FF71969F-33FD-4B03-AF34-B187D7E888BA-614-00000006FDFBEEC9',
-        url: 'https://res.cloudinary.com/fivestarmedia/video/upload/vc_h264/v1660648323/1660648302525.mp4',
-        type: 'video',
-        duration: 10000,
-        seen: false,
-        created: '2021-01-07T03:24:00',
-      },
-    ],
-  },
+
   {
     username: 'Steve Jobs',
     profile:
@@ -127,23 +109,7 @@ const vidArr = [
       },
     ],
   },
-  {
-    username: 'Kuldeep',
-    profile:
-      'https://avatars2.githubusercontent.com/u/26286830?s=460&u=5d586a3783a6edeb226c557240c0ba47294a4229&v=4',
-    stories: [
-      {
-        id: 1,
-        thumbnailUrl:
-          'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/input/1663318794613.thumb-7a5adf63-d81c-4e97-8a1f-7db80fb2592d',
-        url: 'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/imgly9963530838596402581663316784963.mp4',
-        type: 'video',
-        duration: 10000,
-        seen: false,
-        created: '2021-01-07T03:24:00',
-      },
-    ],
-  },
+
   {
     username: 'MS Dhoni',
     profile:
@@ -161,7 +127,6 @@ const vidArr = [
 
         seen: false,
         created: '2022-09-26T10:24:00',
-
       },
       {
         id: 1,
@@ -182,40 +147,6 @@ const vidArr = [
         duration: 10000,
         seen: false,
         created: '2022-09-26T10:24:00',
-      },
-    ],
-  },
-  {
-    username: 'UserName',
-    profile:
-      'https://avatars2.githubusercontent.com/u/26286830?s=460&u=5d586a3783a6edeb226c557240c0ba47294a4229&v=4',
-    stories: [
-      {
-        id: 1,
-        thumbnailUrl:
-          'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/input/1663320857721.thumb-e5ef3738-9660-4c95-bd42-11a28e839ae7',
-        url: 'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/imgly48366877754074639271663320847093.mp4',
-        type: 'video',
-        duration: 10000,
-        seen: false,
-        created: '2021-01-07T03:24:00',
-      },
-    ],
-  },
-  {
-    username: 'Akash',
-    profile:
-      'https://avatars2.githubusercontent.com/u/26286830?s=460&u=5d586a3783a6edeb226c557240c0ba47294a4229&v=4',
-    stories: [
-      {
-        id: 1,
-        thumbnailUrl:
-          'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/input/1663327437381.thumb-dd8849a4-e2a5-416d-8737-a35de3c709de',
-        url: 'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/imgly84213089150138751041663327415436.mp4',
-        type: 'video',
-        duration: 10000,
-        seen: false,
-        created: '2021-01-07T03:24:00',
       },
     ],
   },

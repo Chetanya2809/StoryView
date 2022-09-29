@@ -9,16 +9,12 @@ import {
 } from 'react-native';
 import Colors from '../utils/Colors';
 import vidArr from '../utils/Constansts';
-import Svg, {Circle} from 'react-native-svg';
+
 import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 
 const StatusList = () => {
-
   const [open, setOpen] = useState({open: false});
-
-  const [open, setOpen] = useState({open: false, index: 0, item: {}});
-
 
   const handleOpen = useCallback(
     param => {
@@ -31,11 +27,9 @@ const StatusList = () => {
     const {username, profile} = item;
     const onPressCard = () => {
       setTimeout(() => {
-
         setOpen({open: true, item, index});
 
         setOpen({open: true, item});
-
       }, 10);
     };
 
@@ -45,31 +39,13 @@ const StatusList = () => {
           activeOpacity={0.8}
           style={styles.listContainerView}
           onPress={onPressCard}>
-          <Svg width="90" height="90" viewBox="0 0 100 100">
-            <Circle
-              cx="50"
-              cy="50"
-              r="48"
-              fill="none"
-              stroke="green"
-              strokeWidth={3}
-              strokeDasharray={
-                item.stories.length > 1
-                  ? `${(48 * 2 * Math.PI) / item.stories.length - 3} 3`
-                  : null
-              }
-            />
-            <View style={styles.profileView}>
-              <Image source={{uri: profile}} style={styles.profileImage} />
-            </View>
-          </Svg>
-
           <Text style={styles.userNameText}>{username}</Text>
         </TouchableOpacity>
         <View style={styles.topSeperatorView} />
       </React.Fragment>
     );
   };
+
   return (
     <SafeAreaView style={styles.parentContainer}>
       <Text style={styles.headerText}>{'Users Status'}</Text>
@@ -77,10 +53,6 @@ const StatusList = () => {
 
       <StoryContainer data={vidArr} open={open} handleOpen={handleOpen} />
       <FlatList data={vidArr} renderItem={onRender} />
-
-      <StoryContainer data={open.item} open={open} handleOpen={handleOpen} />
-      <FlatList data={vidArr} renderItem={onRender} bounces={false} />
-
     </SafeAreaView>
   );
 };
