@@ -189,20 +189,20 @@ const RenderStoryItem = props => {
         <ActivityIndicator color={Colors.red} style={styles.indicatorStyle} />
       ) : null}
       <ProgressBar
-        startAnim={startAnim}
         loader={loader}
+        isPause={isPause}
         open={props?.open}
-        handleOpen={props?.handleOpen}
-        stories={props.storyUrl}
         index={props.index}
+        startAnim={startAnim}
+        stories={props.storyUrl}
         profile={props.profile}
         userName={props.userName}
-        isPause={isPause}
         setPause={_pauseCallBack}
-        getAnimatedValue={getAnimatedValue}
         currentAnim={currentAnim}
         currentIndex={currentIndex}
+        handleOpen={props?.handleOpen}
         setCurrentIndex={_setCurrentIndex}
+        getAnimatedValue={getAnimatedValue}
       />
       <StoryHeader
         open={props?.open}
@@ -212,27 +212,8 @@ const RenderStoryItem = props => {
         createdAt={props?.storyUrl[currentIndex]?.created}
       />
     </GestureRecognizer>
-
-    // <GestureRecognizer
-    //   style={styles.parentContainer}
-    //   onSwipeDown={props.onSwipeDown}>
-    //   <TouchableOpacity
-    //     delayLongPress={500}
-    //     // onLongPress={pauseStory}
-    //     // onPressOut={() => {
-    //     //   setPause(false);
-    //     // }}
-    //     // onPress={event => changeStory(event.nativeEvent)}
-    //     activeOpacity={1}
-    //     style={styles.parentContainer}>
-
-    //     {props?.loader ? props?.thumbnailLoader() : props?.contentLoaded()}
-    //   </TouchableOpacity>
-    // </GestureRecognizer>
   );
 };
-
-export default React.memo(RenderStoryItem);
 
 const styles = StyleSheet.create({
   parentContainer: {
@@ -240,7 +221,7 @@ const styles = StyleSheet.create({
     width: width,
   },
   gestureStyle: {
-    backgroundColor: 'black',
+    backgroundColor: Colors.black,
     height: height,
     width: width,
   },
@@ -256,3 +237,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default React.memo(RenderStoryItem);

@@ -1,7 +1,6 @@
 import {
   View,
   Text,
-  Image,
   FlatList,
   StyleSheet,
   SafeAreaView,
@@ -9,7 +8,6 @@ import {
 } from 'react-native';
 import Colors from '../utils/Colors';
 import vidArr from '../utils/Constansts';
-
 import StoryContainer from './StoryContainer';
 import React, {useCallback, useState} from 'react';
 

@@ -12,7 +12,6 @@ const ProgressBar = ({
   loader,
   isPause,
   profile,
-  index,
   userName,
   startAnim,
   handleOpen,
@@ -106,12 +105,11 @@ const ProgressBar = ({
           );
         })}
       </View>
-
       <StoryHeader
-        handleOpen={handleOpen}
-        profile={profile}
         open={open}
+        profile={profile}
         userName={userName}
+        handleOpen={handleOpen}
         createdAt={stories[currentIndex]?.created}
       />
     </>

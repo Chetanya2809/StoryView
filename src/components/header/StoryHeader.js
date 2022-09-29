@@ -10,6 +10,7 @@ import React from 'react';
 import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
+
 const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
   const convertDate = date => {
     let startDate = new Date(date);
