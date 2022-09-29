@@ -22,9 +22,7 @@ let currentAnim = 0;
 
 const StoryContent = props => {
   const flatListref = useRef();
-  console.log('fdhxgjchvjkl,;.', props?.data[props?.open?.index]?.username);
   const [currentIndex, setCurrentIndex] = useState(0);
-  console.log('props', props?.data[props?.open?.index]);
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
   const animateRound = useRef(new Animated.Value(0)).current;
@@ -225,7 +223,6 @@ const StoryContent = props => {
   // };
 
   const _onRender = ({item, index}) => {
-    console.log('ITem is ', item);
     const inputRange = [
       (index - 1) * width,
       index * width,

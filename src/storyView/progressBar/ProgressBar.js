@@ -21,7 +21,6 @@ const ProgressBar = ({
   setCurrentIndex,
   getAnimatedValue,
 }) => {
-  console.log('stories', index);
   useEffect(() => {
     if (isPause) {
       anim.stopAnimation();

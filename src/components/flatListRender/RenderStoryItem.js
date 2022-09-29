@@ -1,33 +1,28 @@
 import {
-  ActivityIndicator,
-  Dimensions,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
   Animated,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
-import React, {useCallback, useRef, useState} from 'react';
-import GestureRecognizer from 'react-native-swipe-gestures';
-
 import Video from 'react-native-video';
 import Colors from '../../utils/Colors';
-import ProgressBar from '../../storyView/progressBar/ProgressBar';
 import StoryHeader from '../header/StoryHeader';
+import React, {useCallback, useRef, useState} from 'react';
+import GestureRecognizer from 'react-native-swipe-gestures';
+import ProgressBar from '../../storyView/progressBar/ProgressBar';
 
 const {height, width} = Dimensions.get('window');
 
 const RenderStoryItem = props => {
-  console.log('propssssss off ', props?.profile);
   let currentAnim = 0;
   const [loader, setLoader] = useState(true);
   const [isPause, setPause] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const fadeAnimation = useRef(new Animated.Value(1)).current;
   const AnimatedVideo = Animated.createAnimatedComponent(Video);
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
-  const fadeAnimation = useRef(new Animated.Value(1)).current;
 
   const onSwipeDown = useCallback(() => {
     props?.handleOpen({...props.open, open: false});
@@ -86,8 +81,6 @@ const RenderStoryItem = props => {
     [isPause],
   );
 
-  // console.log(currentAnim);
-
   const _setCurrentIndex = useCallback(
     param => {
       setCurrentIndex(param);
@@ -107,8 +100,6 @@ const RenderStoryItem = props => {
   );
 
   const newStory = useCallback(() => {
-    // currentAnim = 0;
-
     if (props?.storyUrl.length - 1 > currentIndex) {
       setCurrentIndex(currentIndex + 1);
     } else {
@@ -117,7 +108,6 @@ const RenderStoryItem = props => {
   }, [currentIndex]);
 
   const previousStory = useCallback(() => {
-    // currentAnim = 0;
     if (currentIndex > 0 && props.storyUrl.length) {
       setCurrentIndex(currentIndex - 1);
     } else {
@@ -128,8 +118,6 @@ const RenderStoryItem = props => {
   const pauseStory = useCallback(() => {
     setPause(true);
   }, [isPause]);
-
-  console.log(isPause);
 
   const thumbnailLoader = useCallback(() => {
     return (
@@ -150,7 +138,6 @@ const RenderStoryItem = props => {
   const contentLoaded = useCallback(() => {
     return (
       <>
-        {console.log('ispaused to hiofjoivfjiov', isPause)}
         {props.storyUrl[currentIndex]?.type === 'video' ? (
           <AnimatedVideo
             onLoad={_onLoad}
@@ -184,20 +171,11 @@ const RenderStoryItem = props => {
   }, [currentIndex, isPause]);
 
   return (
-    <GestureRecognizer
-      style={{
-        backgroundColor: 'black',
-        height: height,
-        width: width,
-        // zIndex: 100,
-        // elevation: 100,
-      }}
-      onSwipeDown={onSwipeDown}>
+    <GestureRecognizer style={styles.gestureStyle} onSwipeDown={onSwipeDown}>
       <TouchableOpacity
         delayLongPress={500}
         onLongPress={pauseStory}
         onPressOut={() => {
-          console.log('inside', isPause);
           setPause(false);
         }}
         onPress={event => {
@@ -258,6 +236,11 @@ export default React.memo(RenderStoryItem);
 
 const styles = StyleSheet.create({
   parentContainer: {
+    height: height,
+    width: width,
+  },
+  gestureStyle: {
+    backgroundColor: 'black',
     height: height,
     width: width,
   },
