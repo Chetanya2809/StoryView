@@ -28,8 +28,6 @@ const StatusList = () => {
     const onPressCard = () => {
       setTimeout(() => {
         setOpen({open: true, item, index});
-
-        setOpen({open: true, item});
       }, 10);
     };
 
@@ -46,7 +44,7 @@ const StatusList = () => {
               r="48"
               fill="none"
               stroke={Colors.lightGrey}
-              strokeWidth={3}
+              strokeWidth={4}
               strokeDasharray={
                 item.stories.length > 1
                   ? `${(48 * 2 * Math.PI) / item.stories.length - 4} 4`

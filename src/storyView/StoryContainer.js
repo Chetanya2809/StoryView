@@ -1,6 +1,6 @@
 import React from 'react';
-import StoryView from './StoryView';
-import {StyleSheet, Modal, View, Dimensions} from 'react-native';
+import StoryContent from './StoryContent';
+import {StyleSheet, Modal, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
@@ -13,11 +13,13 @@ const StoryContainer = ({open, handleOpen, data}) => {
           transparent={false}
           animationType="slide"
           style={styles.modalStyle}>
-          <StoryView
+          <StoryContent
             data={data}
             open={open}
-            storyData={open.item}
             handleOpen={handleOpen}
+            story={open?.item?.stories}
+            profile={open?.item?.profile}
+            userName={open?.item?.username}
           />
         </Modal>
       )}
