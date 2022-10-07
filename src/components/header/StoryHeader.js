@@ -11,7 +11,14 @@ import Colors from '../../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
 
-const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
+const StoryHeader = ({
+  open,
+  profile,
+  userName,
+  leftIcon,
+  createdAt,
+  handleOpen,
+}) => {
   const convertDate = date => {
     let startDate = new Date(date);
     let endDate = new Date();
@@ -42,10 +49,7 @@ const StoryHeader = ({profile, userName, createdAt, open, handleOpen}) => {
         style={styles.leftIconView}
         activeOpacity={0.8}
         onPress={handleBackPress}>
-        <Image
-          source={require('../../assets/images/arrow.png')}
-          style={styles.leftIcon}
-        />
+        <Image source={leftIcon} style={styles.leftIcon} />
       </TouchableOpacity>
       <View style={styles.profileView}>
         <Image source={{uri: profile}} style={styles.profileStyle} />

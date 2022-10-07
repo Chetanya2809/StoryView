@@ -135,6 +135,10 @@ const RenderStoryItem = props => {
     );
   }, [currentIndex]);
 
+  const _onPressOut = useCallback(() => {
+    setPause(false);
+  }, [isPause]);
+
   const contentLoaded = useCallback(() => {
     return (
       <>
@@ -175,9 +179,7 @@ const RenderStoryItem = props => {
       <TouchableOpacity
         delayLongPress={500}
         onLongPress={pauseStory}
-        onPressOut={() => {
-          setPause(false);
-        }}
+        onPressOut={_onPressOut}
         onPress={event => {
           changeStory(event?.nativeEvent);
         }}
@@ -207,6 +209,7 @@ const RenderStoryItem = props => {
       <StoryHeader
         open={props?.open}
         profile={props?.profile}
+        leftIcon={require('../../assets/images/arrow.png')}
         userName={props?.userName}
         handleOpen={props?.handleOpen}
         createdAt={props?.storyUrl[currentIndex]?.created}
@@ -225,8 +228,6 @@ const styles = StyleSheet.create({
     height: height,
     width: width,
   },
-  imageDefaultStyle: {height: '100%', width: '100%'},
-  videoStyle: {height: '100%', width: '100%'},
   indicatorStyle: {
     top: 0,
     left: 0,
@@ -236,6 +237,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
   },
+  videoStyle: {height: '100%', width: '100%'},
+  imageDefaultStyle: {height: '100%', width: '100%'},
 });
 
 export default React.memo(RenderStoryItem);
