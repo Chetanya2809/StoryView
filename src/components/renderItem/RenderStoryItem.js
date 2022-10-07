@@ -23,7 +23,6 @@ const RenderStoryItem = props => {
   const fadeAnimation = useRef(new Animated.Value(1)).current;
   const AnimatedVideo = Animated.createAnimatedComponent(Video);
   const opacityAnimation = useRef(new Animated.Value(0.3)).current;
-
   const onSwipeDown = useCallback(() => {
     props?.handleOpen({...props.open, open: false});
   }, [props?.open]);
@@ -205,13 +204,15 @@ const RenderStoryItem = props => {
         handleOpen={props?.handleOpen}
         setCurrentIndex={_setCurrentIndex}
         getAnimatedValue={getAnimatedValue}
+        progressViewColor={props.progressViewColor}
+        progressViewCompleteColor={props.progressViewCompleteColor}
       />
       <StoryHeader
         open={props?.open}
         profile={props?.profile}
-        leftIcon={require('../../assets/images/arrow.png')}
         userName={props?.userName}
         handleOpen={props?.handleOpen}
+        headerLeftIcon={props.headerLeftIcon}
         createdAt={props?.storyUrl[currentIndex]?.created}
       />
     </GestureRecognizer>

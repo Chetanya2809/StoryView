@@ -19,6 +19,8 @@ const ProgressBar = ({
   currentIndex,
   setCurrentIndex,
   getAnimatedValue,
+  progressViewColor,
+  progressViewCompleteColor,
 }) => {
   useEffect(() => {
     if (isPause) {
@@ -41,7 +43,6 @@ const ProgressBar = ({
       anim.removeListener();
     };
   }, []);
-
   const animationFunction = (currentAnim = 0) => {
     anim.setValue(currentAnim);
     Animated.timing(anim, {
@@ -80,13 +81,16 @@ const ProgressBar = ({
                 styles.fixedView,
                 {
                   backgroundColor:
-                    index < currentIndex ? Colors.red : Colors.warmGrey,
+                    index < currentIndex
+                      ? progressViewCompleteColor
+                      : Colors.warmGrey,
                 },
               ]}>
               {index === currentIndex ? (
                 <Animated.View
                   style={[
                     styles.progressView,
+                    {backgroundColor: progressViewColor},
                     {
                       width: anim.interpolate({
                         inputRange: [0, 1],
@@ -129,7 +133,6 @@ const styles = StyleSheet.create({
   progressView: {
     height: 3,
     borderRadius: 2,
-    backgroundColor: Colors.red,
   },
   fixedView: {
     height: 3,

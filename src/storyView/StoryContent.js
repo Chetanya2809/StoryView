@@ -1,6 +1,7 @@
-import {Animated, Dimensions} from 'react-native';
+import {Animated, Dimensions, StyleSheet} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import RenderStoryItem from '../components/renderItem/RenderStoryItem';
+import Colors from '../utils/Colors';
 
 const {height, width} = Dimensions.get('window');
 
@@ -46,6 +47,9 @@ const StoryContent = props => {
           storyUrl={item?.stories}
           userName={item?.username}
           handleOpen={props?.handleOpen}
+          headerLeftIcon={props.headerLeftIcon}
+          progressViewColor={props.progressViewColor}
+          progressViewCompleteColor={props.progressViewCompleteColor}
         />
       </Animated.View>
     );
@@ -54,7 +58,8 @@ const StoryContent = props => {
   return (
     <>
       <Animated.FlatList
-        contentContainerStyle={{backgroundColor: 'black'}}
+        disableIntervalMomentum={true}
+        contentContainerStyle={styles._contentContainerStyle}
         bounces={false}
         ref={flatListref}
         pagingEnabled={true}
@@ -74,5 +79,11 @@ const StoryContent = props => {
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  _contentContainerStyle: {
+    backgroundColor: Colors.black,
+  },
+});
 
 export default React.memo(StoryContent);

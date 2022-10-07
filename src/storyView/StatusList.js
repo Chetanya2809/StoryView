@@ -27,7 +27,7 @@ const StatusList = () => {
     const {username, profile} = item;
     const onPressCard = () => {
       setTimeout(() => {
-        setOpen({open: true, item, index});
+        setOpen({open: true, index});
       }, 10);
     };
 
@@ -66,7 +66,15 @@ const StatusList = () => {
     <SafeAreaView style={styles.parentContainer}>
       <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
-      <StoryContainer data={vidArr} open={open} handleOpen={handleOpen} />
+      <StoryContainer
+        data={vidArr}
+        open={open}
+        handleOpen={handleOpen}
+        animationType="slide"
+        progressViewColor={Colors.red}
+        progressViewCompleteColor={Colors.red}
+        headerLeftIcon={require('../assets/images/arrow.png')}
+      />
       <FlatList data={vidArr} renderItem={onRender} />
     </SafeAreaView>
   );

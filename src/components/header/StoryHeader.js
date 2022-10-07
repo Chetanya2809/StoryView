@@ -15,9 +15,9 @@ const StoryHeader = ({
   open,
   profile,
   userName,
-  leftIcon,
   createdAt,
   handleOpen,
+  headerLeftIcon,
 }) => {
   const convertDate = date => {
     let startDate = new Date(date);
@@ -28,7 +28,7 @@ const StoryHeader = ({
     let days = hours / 24;
     let current;
     if (days >= 1) {
-      current = days == 1 ? 'day' : 'yesterday';
+      current = days == 1 ? 'day' : 'Yesterday';
       return current;
     } else if (hours > 1) {
       current = days == 1 ? 'hour' : 'hours';
@@ -49,7 +49,7 @@ const StoryHeader = ({
         style={styles.leftIconView}
         activeOpacity={0.8}
         onPress={handleBackPress}>
-        <Image source={leftIcon} style={styles.leftIcon} />
+        <Image source={headerLeftIcon} style={styles.leftIcon} />
       </TouchableOpacity>
       <View style={styles.profileView}>
         <Image source={{uri: profile}} style={styles.profileStyle} />
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   profileStyle: {height: '100%', width: '100%'},
   usernameStyle: {color: Colors.white, fontSize: 17, fontWeight: 'bold'},
-  storyTimeStyle: {fontSize: 10, color: Colors.white, marginTop: 3},
+  storyTimeStyle: {fontSize: 14, color: Colors.white},
   userDetailsView: {paddingLeft: 10},
 });
 
