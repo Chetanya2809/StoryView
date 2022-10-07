@@ -1,6 +1,6 @@
 import {Animated, Dimensions} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
-import RenderStoryItem from '../components/flatListRender/RenderStoryItem';
+import RenderStoryItem from '../components/renderItem/RenderStoryItem';
 
 const {height, width} = Dimensions.get('window');
 
