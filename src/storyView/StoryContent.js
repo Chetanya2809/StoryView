@@ -1,7 +1,7 @@
-import {Animated, Dimensions, StyleSheet} from 'react-native';
-import React, {useEffect, useRef, useState} from 'react';
-import RenderStoryItem from '../components/renderItem/RenderStoryItem';
 import Colors from '../utils/Colors';
+import React, {useEffect, useRef, useState} from 'react';
+import {Animated, Dimensions, StyleSheet} from 'react-native';
+import RenderStoryItem from '../components/renderItem/RenderStoryItem';
 
 const {height, width} = Dimensions.get('window');
 
@@ -60,8 +60,6 @@ const StoryContent = props => {
   return (
     <>
       <Animated.FlatList
-        disableIntervalMomentum={true}
-        contentContainerStyle={styles._contentContainerStyle}
         bounces={false}
         ref={flatListref}
         pagingEnabled={true}
@@ -70,6 +68,7 @@ const StoryContent = props => {
         decelerationRate={0}
         renderItem={_onRender}
         snapToInterval={width}
+        disableIntervalMomentum={true}
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x: animateRound}}}],
           {
@@ -77,6 +76,7 @@ const StoryContent = props => {
           },
         )}
         keyExtractor={item => item.stories[currentIndex]?.url}
+        contentContainerStyle={styles._contentContainerStyle}
       />
     </>
   );

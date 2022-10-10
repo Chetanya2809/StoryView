@@ -1,20 +1,15 @@
 import React, {useEffect} from 'react';
 import Colors from '../../utils/Colors';
-import StoryHeader from '../../components/header/StoryHeader';
 import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
 const ProgressBar = ({
-  open,
-  stories,
   loader,
+  stories,
   isPause,
-  profile,
-  userName,
   startAnim,
-  handleOpen,
   currentAnim,
   currentIndex,
   setCurrentIndex,

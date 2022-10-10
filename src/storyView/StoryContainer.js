@@ -26,14 +26,11 @@ const StoryContainer = ({
           <StoryContent
             data={data}
             open={open}
-            handleOpen={handleOpen}
-            // story={open?.item?.stories}
-            // profile={open?.item?.profile}
             header={header}
+            handleOpen={handleOpen}
             headerLeftIcon={headerLeftIcon}
-            headerLeftIconStyle={headerLeftIconStyle}
-            // userName={open?.item?.username}
             progressViewColor={progressViewColor}
+            headerLeftIconStyle={headerLeftIconStyle}
             progressViewCompleteColor={progressViewCompleteColor}
           />
         </Modal>
