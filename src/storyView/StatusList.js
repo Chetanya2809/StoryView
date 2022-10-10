@@ -67,13 +67,15 @@ const StatusList = () => {
       <Text style={styles.headerText}>{'Users Status'}</Text>
       <View style={styles.topSeperatorView} />
       <StoryContainer
-        data={vidArr}
         open={open}
-        handleOpen={handleOpen}
+        header={true}
+        data={vidArr}
         animationType="slide"
+        headerLeftIcon={true}
+        handleOpen={handleOpen}
         progressViewColor={Colors.red}
         progressViewCompleteColor={Colors.red}
-        headerLeftIcon={require('../assets/images/arrow.png')}
+        headerLeftIconStyle={styles.headerLeftIconStyle}
       />
       <FlatList data={vidArr} renderItem={onRender} />
     </SafeAreaView>

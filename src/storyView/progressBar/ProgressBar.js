@@ -109,13 +109,6 @@ const ProgressBar = ({
           );
         })}
       </View>
-      <StoryHeader
-        open={open}
-        profile={profile}
-        userName={userName}
-        handleOpen={handleOpen}
-        createdAt={stories[currentIndex]?.created}
-      />
     </>
   );
 };

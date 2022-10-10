@@ -42,6 +42,7 @@ const StoryContent = props => {
       <Animated.View style={[{transform: [{rotate}, {translateX: rightGap}]}]}>
         <RenderStoryItem
           index={index}
+          header={props.header}
           open={props?.open}
           profile={item?.profile}
           storyUrl={item?.stories}
@@ -49,6 +50,7 @@ const StoryContent = props => {
           handleOpen={props?.handleOpen}
           headerLeftIcon={props.headerLeftIcon}
           progressViewColor={props.progressViewColor}
+          headerLeftIconStyle={props.headerLeftIconStyle}
           progressViewCompleteColor={props.progressViewCompleteColor}
         />
       </Animated.View>

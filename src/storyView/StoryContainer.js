@@ -7,10 +7,12 @@ const {height, width} = Dimensions.get('window');
 const StoryContainer = ({
   open,
   data,
+  header,
   handleOpen,
   animationType,
   headerLeftIcon,
   progressViewColor,
+  headerLeftIconStyle,
   progressViewCompleteColor,
 }) => {
   return (
@@ -25,10 +27,12 @@ const StoryContainer = ({
             data={data}
             open={open}
             handleOpen={handleOpen}
-            story={open?.item?.stories}
-            profile={open?.item?.profile}
+            // story={open?.item?.stories}
+            // profile={open?.item?.profile}
+            header={header}
             headerLeftIcon={headerLeftIcon}
-            userName={open?.item?.username}
+            headerLeftIconStyle={headerLeftIconStyle}
+            // userName={open?.item?.username}
             progressViewColor={progressViewColor}
             progressViewCompleteColor={progressViewCompleteColor}
           />

@@ -159,7 +159,7 @@ const RenderStoryItem = props => {
           <Animated.Image
             onLoadStart={startAnimation}
             onLoad={_onLoad}
-            resizeMode="contain"
+            resizeMode="cover"
             source={{uri: props.storyUrl[currentIndex]?.url}}
             style={[
               styles.imageDefaultStyle,
@@ -207,14 +207,18 @@ const RenderStoryItem = props => {
         progressViewColor={props.progressViewColor}
         progressViewCompleteColor={props.progressViewCompleteColor}
       />
-      <StoryHeader
-        open={props?.open}
-        profile={props?.profile}
-        userName={props?.userName}
-        handleOpen={props?.handleOpen}
-        headerLeftIcon={props.headerLeftIcon}
-        createdAt={props?.storyUrl[currentIndex]?.created}
-      />
+
+      {props.header && (
+        <StoryHeader
+          open={props?.open}
+          profile={props?.profile}
+          userName={props?.userName}
+          handleOpen={props?.handleOpen}
+          headerLeftIconStyle={props.headerLeftIconStyle}
+          headerLeftIcon={props.headerLeftIcon}
+          createdAt={props?.storyUrl[currentIndex]?.created}
+        />
+      )}
     </GestureRecognizer>
   );
 };
