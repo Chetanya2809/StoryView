@@ -11,11 +11,7 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1532579853048-ec5f8f15f88d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-
         created: '2022-09-27T07:00:00',
-
-        seen: false,
-        created: '2022-09-25T10:24:00',
       },
     ],
   },
@@ -31,11 +27,7 @@ const vidArr = [
         url: 'https://www.w3schools.com/html/mov_bbb.mp4',
         type: 'video',
         duration: 5000,
-
         created: '2022-09-27T10:24:00',
-
-        seen: false,
-        created: '2022-09-26T23:24:00',
       },
       {
         id: 1,
@@ -44,7 +36,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T23:24:00',
       },
 
@@ -55,7 +46,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1476292026003-1df8db2694b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T23:24:00',
       },
       {
@@ -65,7 +55,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1498982261566-1c28c9cf4c02?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T23:24:00',
       },
     ],
@@ -84,7 +73,6 @@ const vidArr = [
         url: 'https://mobilecdn.6thstreet.com/AllBanners/bmt/13-05-2022+Women/HL+Videos+for+women/footwear.mp4',
         type: 'video',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T10:24:00',
       },
       {
@@ -94,7 +82,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1496287437689-3c24997cca99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T10:24:00',
       },
       {
@@ -104,7 +91,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1514870262631-55de0332faf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T10:24:00',
       },
     ],
@@ -122,11 +108,7 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1512101176959-c557f3516787?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-
         created: '2022-09-27T10:24:00',
-
-        seen: false,
-        created: '2022-09-26T10:24:00',
       },
       {
         id: 1,
@@ -135,7 +117,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1478397453044-17bb5f994100?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T10:24:00',
       },
       {
@@ -145,7 +126,6 @@ const vidArr = [
         url: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=581&q=80',
         type: 'image',
         duration: 5000,
-        seen: false,
         created: '2022-09-26T10:24:00',
       },
     ],
