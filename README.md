@@ -23,6 +23,10 @@ This StoryView component contains following libraries which you have to install 
 - A fully customizable Header View, you can use default one or pass in your choice of component.
 
 
+## Preview
+$~~~~~~~~~~~~~~$<img width="350" alt="Screenshot 2022-10-11 at 11 14 23 AM" src="https://user-images.githubusercontent.com/103026925/195006541-b268fb5c-ab2b-40c6-9299-cb98dbead267.png">$~~~~~~~~~~~~~~~~~~~~~~~~~~$<img width="350" alt="Screenshot 2022-10-11 at 11 14 19 AM" src="https://user-images.githubusercontent.com/103026925/195006545-8a357b76-5fd6-4cd4-9180-da4b4eb7b426.png">
+
+
 ## Installation
 
 If using yarn: 
@@ -129,5 +133,4 @@ You have to add it in render item of flatlist. It handles the cardPress open mod
       </React.Fragment>
     );
 ```
-## Preview
-$~~~~~~~~~~~~~~$<img width="350" alt="Screenshot 2022-10-11 at 11 14 23 AM" src="https://user-images.githubusercontent.com/103026925/195006541-b268fb5c-ab2b-40c6-9299-cb98dbead267.png">$~~~~~~~~~~~~~~~~~~~~~~~~~~$<img width="350" alt="Screenshot 2022-10-11 at 11 14 19 AM" src="https://user-images.githubusercontent.com/103026925/195006545-8a357b76-5fd6-4cd4-9180-da4b4eb7b426.png">
+
