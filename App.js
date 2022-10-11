@@ -1,8 +1,8 @@
 import React from 'react';
-import MyRoutes from './src/routes/MyRoutes';
+import StatusList from './src/storyView/StatusList';
 
 const App = () => {
-  return <MyRoutes />;
+  return <StatusList />;
 };
 
 export default App;

@@ -1,60 +1,46 @@
 import React from 'react';
-import StoryView from './StoryView';
-import Colors from '../utils/Colors';
-// import Modal from 'react-native-modal';
-import GestureRecognizer from 'react-native-swipe-gestures';
-import {StyleSheet, Modal, View, Dimensions} from 'react-native';
+import StoryContent from './StoryContent';
+import {StyleSheet, Modal, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
-const StoryContainer = ({open, handleOpen, data}) => {
+const StoryContainer = ({
+  open,
+  data,
+  header,
+  handleOpen,
+  animationType,
+  headerLeftIcon,
+  progressViewColor,
+  headerLeftIconStyle,
+  progressViewCompleteColor,
+}) => {
   return (
-
     <>
       {open && (
         <Modal
           visible={open.open}
           transparent={false}
-          animationType="slide"
+          animationType={animationType}
           style={styles.modalStyle}>
-          <StoryView
+          <StoryContent
             data={data}
-            storyData={open.item}
             open={open}
+            header={header}
             handleOpen={handleOpen}
+            headerLeftIcon={headerLeftIcon}
+            progressViewColor={progressViewColor}
+            headerLeftIconStyle={headerLeftIconStyle}
+            progressViewCompleteColor={progressViewCompleteColor}
           />
         </Modal>
       )}
     </>
-
-    // <Modal
-    //   isVisible={open.open}
-    //   coverScreen={true}
-    //   swipeDirection="down"
-    //   onSwipeComplete={onCompleteSwipe}
-    //   style={styles.modalStyle}>
-    // </Modal>
-
-    <Modal
-      isVisible={open.open}
-      coverScreen={true}
-      swipeDirection="down"
-      onSwipeComplete={onCompleteSwipe}
-      style={styles.modalStyle}>
-      <StoryView
-        open={open}
-        handleOpen={handleOpen}
-        storyData={open.item}
-        index={open.index}
-      />
-    </Modal>
-
   );
 };
 
 const styles = StyleSheet.create({
   modalStyle: {
-    // margin: 0,
     height: height,
     width: width,
   },

@@ -1,28 +1,22 @@
 import React, {useEffect} from 'react';
 import Colors from '../../utils/Colors';
-import StoryHeader from '../../components/header/StoryHeader';
 import {View, Animated, StyleSheet, Dimensions} from 'react-native';
 
 const {height, width} = Dimensions.get('screen');
 var anim = new Animated.Value(0);
 
 const ProgressBar = ({
-  open,
-  stories,
   loader,
+  stories,
   isPause,
-  profile,
-  open,
-  index,
-  userName,
   startAnim,
-  handleOpen,
   currentAnim,
   currentIndex,
   setCurrentIndex,
   getAnimatedValue,
+  progressViewColor,
+  progressViewCompleteColor,
 }) => {
-  console.log('stories', index);
   useEffect(() => {
     if (isPause) {
       anim.stopAnimation();
@@ -44,7 +38,6 @@ const ProgressBar = ({
       anim.removeListener();
     };
   }, []);
-
   const animationFunction = (currentAnim = 0) => {
     anim.setValue(currentAnim);
     Animated.timing(anim, {
@@ -83,13 +76,16 @@ const ProgressBar = ({
                 styles.fixedView,
                 {
                   backgroundColor:
-                    index < currentIndex ? Colors.red : Colors.warmGrey,
+                    index < currentIndex
+                      ? progressViewCompleteColor
+                      : Colors.warmGrey,
                 },
               ]}>
               {index === currentIndex ? (
                 <Animated.View
                   style={[
                     styles.progressView,
+                    {backgroundColor: progressViewColor},
                     {
                       width: anim.interpolate({
                         inputRange: [0, 1],
@@ -108,15 +104,6 @@ const ProgressBar = ({
           );
         })}
       </View>
-
-      <StoryHeader
-        handleOpen={handleOpen}
-        profile={profile}
-        open={open}
-        userName={userName}
-        createdAt={stories[currentIndex]?.created}
-      />
-
     </>
   );
 };
@@ -134,7 +121,6 @@ const styles = StyleSheet.create({
   progressView: {
     height: 3,
     borderRadius: 2,
-    backgroundColor: Colors.red,
   },
   fixedView: {
     height: 3,
