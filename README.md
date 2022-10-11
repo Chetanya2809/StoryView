@@ -40,6 +40,10 @@ If using npm:
 npm i react-native-stories-view
 ```
 
+```
+Note - The data should be in the form of array of objects, in which one object should be containing an array of stories which consist of id, thumbnail, url, image, duration, created.
+```
+
 #### Basic usage
 This simply opens the modal and show content of story. You can handle animation type of modal by this.
 Enable/disable story header and custom style progressBar.
