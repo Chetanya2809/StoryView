@@ -129,5 +129,3 @@ You have to add it in render item of flatlist. It handles the cardPress open mod
       </React.Fragment>
     );
 ```
-
-<img width="320" alt="Screenshot 2022-10-11 at 11 04 02 AM" src="https://user-images.githubusercontent.com/103026925/195005135-8f25f836-1edd-4057-a681-8fc6b578e409.png">
