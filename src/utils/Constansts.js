@@ -47,19 +47,6 @@ const vidArr = [
         seen: false,
         created: '2022-09-26T23:24:00',
       },
-      // {
-      //   id: 1,
-      //   thumbnailUrl:
-      //     'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
-      //   url: 'https://www.w3schools.com/html/mov_bbb.mp4',
-      //   type: 'video',
-      //   duration: 10000,
-
-      //   created: '2022-09-27T10:24:00',
-
-      //   seen: false,
-      //   created: '2022-09-26T23:24:00',
-      // },
 
       {
         id: 2,
@@ -90,16 +77,16 @@ const vidArr = [
       'https://s3.amazonaws.com/media.eremedia.com/uploads/2012/05/15181015/stevejobs.jpg',
 
     stories: [
-      {
-        id: 0,
-        thumbnailUrl:
-          'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
-        url: 'https://mobilecdn.6thstreet.com/AllBanners/bmt/13-05-2022+Women/HL+Videos+for+women/footwear.mp4',
-        type: 'video',
-        duration: 10000,
-        seen: false,
-        created: '2022-09-26T10:24:00',
-      },
+      // {
+      //   id: 0,
+      //   thumbnailUrl:
+      //     'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
+      //   url: 'https://mobilecdn.6thstreet.com/AllBanners/bmt/13-05-2022+Women/HL+Videos+for+women/footwear.mp4',
+      //   type: 'video',
+      //   duration: 10000,
+      //   seen: false,
+      //   created: '2022-09-26T10:24:00',
+      // },
       {
         id: 1,
         thumbnailUrl:

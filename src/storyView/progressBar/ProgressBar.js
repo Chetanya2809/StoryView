@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import Colors from '../../utils/Colors';
 import StoryHeader from '../../components/header/StoryHeader';
 import {View, Animated, StyleSheet, Dimensions} from 'react-native';
@@ -8,8 +8,8 @@ var anim = new Animated.Value(0);
 
 const ProgressBar = ({
   open,
-
   stories,
+  honewalaIndex,
   loader,
   isPause,
   profile,
@@ -19,6 +19,7 @@ const ProgressBar = ({
   handleOpen,
   currentAnim,
   currentIndex,
+  changedIndex,
   setCurrentIndex,
   getAnimatedValue,
 }) => {
@@ -33,16 +34,16 @@ const ProgressBar = ({
     startAnim(animationFunction);
   }, [currentIndex]);
 
-  useEffect(() => {
-    anim.addListener(({value}) => {
-      if (value != 1) getAnimatedValue(value);
-    });
+  // useEffect(() => {
+  //   anim.addListener(({value}) => {
+  //     // if (value != 1) getAnimatedValue(value);
+  //   });
 
-    return () => {
-      anim.stopAnimation();
-      anim.removeListener();
-    };
-  }, []);
+  //   return () => {
+  //     anim.stopAnimation();
+  //     anim.removeListener();
+  //   };
+  // }, []);
 
   const animationFunction = (currentAnim = 0) => {
     anim.setValue(currentAnim);
@@ -87,8 +88,6 @@ const ProgressBar = ({
               ]}>
               {index === currentIndex ? (
                 <>
-                  {console.log(stories)}
-                  {console.log(-(width / stories.length - stories.length + 1))}
                   <Animated.View
                     style={[
                       styles.progressView,
