@@ -1,148 +1,91 @@
-import Video from 'react-native-video';
-import React, {useCallback, useState} from 'react';
-import ProgressBar from './progressBar/ProgressBar';
-import {Image, StyleSheet, Dimensions, TouchableOpacity} from 'react-native';
+import Colors from '../utils/Colors';
+import React, {useEffect, useRef, useState} from 'react';
+import {Animated, Dimensions, StyleSheet} from 'react-native';
+import RenderStoryItem from '../components/renderItem/RenderStoryItem';
 
 const {height, width} = Dimensions.get('window');
-let currentAnim = 0;
 
 const StoryContent = props => {
+  const flatListref = useRef();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPause, setPause] = useState(false);
-  const [loader, setLoader] = useState(true);
+  const animateRound = useRef(new Animated.Value(0)).current;
 
-  const _setCurrentIndex = useCallback(
-    param => {
-      setCurrentIndex(param);
-    },
-    [currentIndex],
-  );
-
-  const _pauseCallBack = useCallback(
-    pause => {
-      setPause(pause);
-    },
-    [isPause],
-  );
-
-  const changeStory = useCallback(
-    event => {
-      if (event.locationX > width / 2) {
-        newStory();
-      } else {
-        previousStory();
-      }
-    },
-    [currentIndex],
-  );
-
-  const startAnim = param => {
-    if (param) param();
+  const scrolltoPage = () => {
+    flatListref.current.scrollToOffset({
+      animated: false,
+      offset: width * props?.open?.index,
+    });
   };
 
-  const newStory = useCallback(() => {
-    currentAnim = 0;
-
-    if (props.story.length - 1 > currentIndex) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setCurrentIndex(0);
-    }
-  }, [currentIndex]);
-
-  const previousStory = useCallback(() => {
-    currentAnim = 0;
-
-    if (currentIndex > 0 && props.story.length) {
-      setCurrentIndex(currentIndex - 1);
-    } else {
-      setCurrentIndex(0);
-    }
-  }, [currentIndex]);
-
-  const pauseStory = useCallback(() => {
-    setPause(true);
+  useEffect(() => {
+    setTimeout(() => {
+      scrolltoPage();
+    }, 200);
   }, []);
 
-  const thumbnailLoader = () => {
+  const _onRender = ({item, index}) => {
+    const inputRange = [
+      (index - 1) * width,
+      index * width,
+      (index + 1) * width,
+    ];
+
+    const rotate = animateRound.interpolate({
+      inputRange,
+      outputRange: ['30 deg', '0 deg', '-30 deg'],
+    });
+    const rightGap = animateRound.interpolate({
+      inputRange,
+      outputRange: [200, 0, -200],
+    });
     return (
-      <Image
-        resizeMode="contain"
-        source={{uri: props?.story[currentIndex]?.thumbnailUrl}}
-        style={styles.imageDefaultStyle}
-        onLoadEnd={() => {
-          setInterval(() => {
-            setLoader(false);
-            startAnim();
-          }, 500);
-        }}
-      />
+      <Animated.View style={[{transform: [{rotate}, {translateX: rightGap}]}]}>
+        <RenderStoryItem
+          index={index}
+          header={props.header}
+          open={props?.open}
+          profile={item?.profile}
+          storyUrl={item?.stories}
+          userName={item?.username}
+          handleOpen={props?.handleOpen}
+          headerLeftIcon={props.headerLeftIcon}
+          progressViewColor={props.progressViewColor}
+          headerLeftIconStyle={props.headerLeftIconStyle}
+          progressViewCompleteColor={props.progressViewCompleteColor}
+        />
+      </Animated.View>
     );
   };
-
-  const contentLoaded = () => {
-    return (
-      <>
-        {props.story[currentIndex]?.type === 'video' ? (
-          <Video
-            paused={isPause}
-            resizeMode={'contain'}
-            style={styles.videoStyle}
-            source={{uri: props?.story[currentIndex].url}}
-          />
-        ) : (
-          <Image
-            resizeMode="contain"
-            source={{uri: props?.story[currentIndex]?.url}}
-            style={styles.imageDefaultStyle}
-          />
-        )}
-      </>
-    );
-  };
-
-  const getAnimatedValue = useCallback(
-    anim => {
-      if (!isPause) {
-        currentAnim = anim;
-      }
-    },
-    [isPause],
-  );
 
   return (
-    <TouchableOpacity
-      delayLongPress={500}
-      onLongPress={pauseStory}
-      onPressOut={() => {
-        setPause(false);
-      }}
-      onPress={event => changeStory(event.nativeEvent)}
-      activeOpacity={1}
-      style={styles.parentContainer}>
-      <ProgressBar
-        startAnim={startAnim}
-        stories={props.story}
-        isPause={isPause}
-        setPause={_pauseCallBack}
-        getAnimatedValue={getAnimatedValue}
-        currentAnim={currentAnim}
-        currentIndex={currentIndex}
-        setCurrentIndex={_setCurrentIndex}
+    <>
+      <Animated.FlatList
+        bounces={false}
+        ref={flatListref}
+        pagingEnabled={true}
+        horizontal={true}
+        data={props?.data}
+        decelerationRate={0}
+        renderItem={_onRender}
+        snapToInterval={width}
+        disableIntervalMomentum={true}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {x: animateRound}}}],
+          {
+            useNativeDriver: true,
+          },
+        )}
+        keyExtractor={item => item.stories[currentIndex]?.url}
+        contentContainerStyle={styles._contentContainerStyle}
       />
-
-      {loader ? thumbnailLoader() : contentLoaded()}
-    </TouchableOpacity>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  videoStyle: {
-    width: '100%',
-    height: '100%',
+  _contentContainerStyle: {
+    backgroundColor: Colors.black,
   },
-  parentContainer: {flex: 1},
-  imageDefaultStyle: {height: '100%', width: '100%'},
 });
 
 export default React.memo(StoryContent);

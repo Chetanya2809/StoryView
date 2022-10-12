@@ -1,30 +1,48 @@
 import React from 'react';
-import StoryView from './StoryView';
-import Colors from '../utils/Colors';
-import Modal from 'react-native-modal';
-import {StyleSheet} from 'react-native';
+import StoryContent from './StoryContent';
+import {StyleSheet, Modal, Dimensions} from 'react-native';
 
-const StoryContainer = ({open, handleOpen}) => {
-  const onCompleteSwipe = () => {
-    handleOpen({...open, open: false});
-  };
+const {height, width} = Dimensions.get('window');
 
+const StoryContainer = ({
+  open,
+  data,
+  header,
+  handleOpen,
+  animationType,
+  headerLeftIcon,
+  progressViewColor,
+  headerLeftIconStyle,
+  progressViewCompleteColor,
+}) => {
   return (
-    <Modal
-      isVisible={open.open}
-      coverScreen={true}
-      swipeDirection="down"
-      onSwipeComplete={onCompleteSwipe}
-      style={styles.modalStyle}>
-      <StoryView storyData={open.item} />
-    </Modal>
+    <>
+      {open && (
+        <Modal
+          visible={open.open}
+          transparent={false}
+          animationType={animationType}
+          style={styles.modalStyle}>
+          <StoryContent
+            data={data}
+            open={open}
+            header={header}
+            handleOpen={handleOpen}
+            headerLeftIcon={headerLeftIcon}
+            progressViewColor={progressViewColor}
+            headerLeftIconStyle={headerLeftIconStyle}
+            progressViewCompleteColor={progressViewCompleteColor}
+          />
+        </Modal>
+      )}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   modalStyle: {
-    margin: 0,
-    backgroundColor: Colors.black,
+    height: height,
+    width: width,
   },
 });
 

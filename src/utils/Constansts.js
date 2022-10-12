@@ -2,7 +2,7 @@ const vidArr = [
   {
     username: 'Reeturaj Thakur',
     profile:
-      'https://avatars2.githubusercontent.com/u/26286830?s=460&u=5d586a3783a6edeb226c557240c0ba47294a4229&v=4',
+      'https://aws-preprod-video-on-demand-source-3ye8ektr4b31.s3-accelerate.amazonaws.com/input/1663331872287.thumb-FF71969F-33FD-4B03-AF34-B187D7E888BA-614-00000006FDFBEEC9',
     stories: [
       {
         id: 1,
@@ -10,9 +10,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1532579853048-ec5f8f15f88d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
-        thumbnailUrl: '',
+        duration: 5000,
+        created: '2022-09-27T07:00:00',
       },
     ],
   },
@@ -27,8 +26,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://www.w3schools.com/html/mov_bbb.mp4',
         type: 'video',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-27T10:24:00',
       },
       {
         id: 1,
@@ -36,8 +35,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1500099817043-86d46000d58f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T23:24:00',
       },
 
       {
@@ -46,8 +45,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1476292026003-1df8db2694b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T23:24:00',
       },
       {
         id: 3,
@@ -55,10 +54,12 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1498982261566-1c28c9cf4c02?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
+        duration: 5000,
+        created: '2022-09-26T23:24:00',
       },
     ],
   },
+
   {
     username: 'Steve Jobs',
     profile:
@@ -71,8 +72,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://mobilecdn.6thstreet.com/AllBanners/bmt/13-05-2022+Women/HL+Videos+for+women/footwear.mp4',
         type: 'video',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T10:24:00',
       },
       {
         id: 1,
@@ -80,8 +81,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1496287437689-3c24997cca99?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T10:24:00',
       },
       {
         id: 2,
@@ -89,11 +90,12 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1514870262631-55de0332faf6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T10:24:00',
       },
     ],
   },
+
   {
     username: 'MS Dhoni',
     profile:
@@ -105,8 +107,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1512101176959-c557f3516787?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-27T10:24:00',
       },
       {
         id: 1,
@@ -114,8 +116,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1478397453044-17bb5f994100?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T10:24:00',
       },
       {
         id: 2,
@@ -123,8 +125,8 @@ const vidArr = [
           'https://res.cloudinary.com/demo/image/upload/w_640/e_blur:1000,q_1,f_auto/e_cartoonify/string_1.jpg',
         url: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=581&q=80',
         type: 'image',
-        duration: 10000,
-        created: '2021-01-07T03:24:00',
+        duration: 5000,
+        created: '2022-09-26T10:24:00',
       },
     ],
   },
